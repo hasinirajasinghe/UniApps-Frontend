@@ -1,21 +1,27 @@
-import React from 'react'
+import React from "react";
+import Table from "react-bootstrap/Table";
 
-const Application = ({application}) => {
+const Application = ({ application }) => {
+    return (
+      <tbody>
+          <tr>
+              <th>{application.applicant}</th>
+              <td>{application.academic_year}</td>
+              <td>{application.intended_start}</td>
+              <td>{application.intended_major}</td>
+              <td>{application.status}</td>
+              <td>{application.last_updated}</td>
+              <td>{application.school_last_attended}</td>
+              <td>{application.gpa}</td>
+              <td>
+                  <a href="/edit-applicant">Edit</a> 
+              </td>
+              <td>
+                  <a href="/delete-applicant">Delete</a> 
+              </td>
+          </tr>
+      </tbody>
+    );
+};
 
-  return (
-    <div class="border border-secondary">
-        <div>
-            <h3>{application.applicant}</h3>
-            <h4>{application.academic_year}</h4>
-            <h4>{application.intended_start}</h4>
-            <h4>{application.intended_major}</h4>
-            <p>{application.status}</p>
-            <p>{application.last_updated}</p>
-            <p>{application.school_last_attended}</p>
-            <p>{application.gpa}</p>
-        </div>
-    </div>
-  )
-}
-
-export default Application
+export default Application;

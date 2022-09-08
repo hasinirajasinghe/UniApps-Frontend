@@ -1,19 +1,20 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
 
 const Applicant = ({ applicant }) => {
     return (
-        <Table striped bordered hover size="lg" responsive="me">
-            <tbody>
-                <tr>
-                    <td class="col-3">{applicant.name}</td>
-                    <td class="col-3">{applicant.email}</td>
-                    <td class="col-3">{applicant.phone_number}</td>
-                    <td class="col-3">{applicant.major}</td>
-                    <td class="col-3">{applicant.enrollment_status}</td>
-                </tr>
-            </tbody>
-        </Table>
+        <tbody>
+            <tr>
+                <td>{applicant.name}</td>
+                <td>{applicant.major}</td>
+                <td>{applicant.enrollment_status}</td>
+                <td>
+                    <a href="/edit-applicant">Edit</a> 
+                </td>
+                <td>
+                    <a href="/delete-applicant">Delete</a> 
+                </td>
+            </tr>
+        </tbody>
     );
 };
 

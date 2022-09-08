@@ -3,6 +3,7 @@ import React, { useState, useEffect} from 'react';
 import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dashboard from './pages/Dashboard';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   const [ applicants, setApplicants ] = useState([])
@@ -23,8 +24,8 @@ function App() {
   return (
     <div>
         <Routes>
-          {/* <Route path='/' element={<LoginPage/>}/>
-          <Route path='/register' element={<RegisterPage/>}/> */}
+          {/* <Route path='/' element={<LoginPage/>}/> */}
+          <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/dashboard' element={<Dashboard applicants={applicants} applications={applications}/>}/>
         </Routes>
     </div>

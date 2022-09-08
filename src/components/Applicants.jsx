@@ -9,23 +9,21 @@ const Applicants = ({ applicants }) => {
                 <h1>Applicants</h1>
                 <a href="/new-applicant">+</a>
             </div>
-            <Table striped bordered hover class="d-flex">
+            <Table hover>
                 <thead>
                     <tr>
-                        <th class="col-3">Applicant Name</th>
-                        <th class="col-3">Email</th>
-                        <th class="col-3">Phone Number</th>
-                        <th class="col-3">Major</th>
-                        <th class="col-3">Enrollment Status</th>
+                        <th scope="col">Applicant Name</th>
+                        <th scope="col">Major</th>
+                        <th scope="col">Enrollment Status</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
-              </Table>
                 {applicants.map((applicant) => {
                     // Needs key to distinguish each element
-                    return (
-                        <Applicant applicant={applicant} key={applicant.id} />
-                    );
+                    return <Applicant applicant={applicant} key={applicant.id} />
                 })}
+            </Table>
         </div>
     );
 };
