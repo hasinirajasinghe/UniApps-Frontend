@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 const Register = () => {
     const initalState = {
@@ -18,32 +19,43 @@ const Register = () => {
     }
 
     return (
-        <div>
-            <Form>
-                <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="name" placeholder="Username" name="username" onChange={handleChange}/>
-                </Form.Group>
+        <div class="shadow p-3 mb-5 rounded" style={{width:"370px", margin:"5% auto", backgroundColor:"#329ebc"}}>
+            <div style={{textAlign: "center", margin:"30px 0", fontFamily:"Poiret One"}}>
+                <h2 style={{fontSize:"35px"}}>Register</h2>
+            </div>
+            <div>
+                <Form style={{marginTop:"40px"}}>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                        <FloatingLabel controlId="floatingInput" label="Username" className="mb-3">
+                            <Form.Control type="name" placeholder="Username" name="username" onChange={handleChange}/>
+                        </FloatingLabel>
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" name="email" onChange={handleChange} />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">
+                            <Form.Control type="email" placeholder="Email address" name="email" onChange={handleChange} />
+                        </FloatingLabel>
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange}/>
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <FloatingLabel controlId="floatingInput" label="Password" className="mb-3">
+                            <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange}/>
+                        </FloatingLabel>
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password Confirmation</Form.Label>
-                    <Form.Control type="password" placeholder="Password confirmation"  name="password_confirmation" onChange={handleChange}/>
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <FloatingLabel controlId="floatingInput" label="Password confirmation" className="mb-3">
+                            <Form.Control type="password" placeholder="Password confirmation"  name="password_confirmation" onChange={handleChange}/>
+                        </FloatingLabel>
+                    </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+                    <div style={{textAlign:"center"}}>
+                        <Button variant="primary" type="submit" style={{backgroundColor:"#ffb703", border:"#ffb703", fontWeight:"bold", textAlign:"center"}}>
+                            Register
+                        </Button> 
+                    </div>
+                </Form>
+            </div>
         </div>
     );
 };

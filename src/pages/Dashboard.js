@@ -3,6 +3,7 @@ import Applicants from "../components/Applicants";
 import Applications from "../components/Applications";
 
 const Dashboard = ({ applicants, applications }) => {
+
     return (
         <div>
             <Applicants applicants={applicants} />
