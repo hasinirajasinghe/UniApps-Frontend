@@ -39,3 +39,42 @@
   }
 }
 
+/* Applicants and Applications */
+.app-main-container {
+  width:90vw;
+  margin:0 auto;
+}
+
+.app-header-container {
+  background-color:#329ebc;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
+}
+
+.app-header-container h1 {
+  display:inline;
+  font-family:"Poiret One";
+  font-weight: bolder;
+  margin-left:15px;
+  font-size: 29px;
+}
+
+.app-header-container a {
+  display:inline;
+  text-decoration:none;
+  float:right;
+  color: black;
+  font-size: 23px;
+  font-weight: bolder;
+  padding-right:10px;
+}
+
+.app-table {
+  height:200px;
+  overflow:auto; 
+  width:90vw;
+}
+
+.app-table thead {
+  font-size:12px;
+}

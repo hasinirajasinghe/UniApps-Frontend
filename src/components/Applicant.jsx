@@ -2,7 +2,7 @@ import React from "react";
 
 const Applicant = ({ applicant }) => {
     return (
-        <tbody>
+        <tbody style={{fontSize:"12px", fontFamily:"sans-serif"}}>
             <tr>
                 <td>{applicant.name}</td>
                 <td>{applicant.major}</td>

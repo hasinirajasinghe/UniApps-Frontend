@@ -1,18 +1,15 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
 
 const Application = ({ application }) => {
     return (
-      <tbody>
+      <tbody style={{fontSize:"12px", fontFamily:"sans-serif"}}>
           <tr>
-              <th>{application.applicant}</th>
+              <td>{application.applicant}</td>
               <td>{application.academic_year}</td>
               <td>{application.intended_start}</td>
               <td>{application.intended_major}</td>
               <td>{application.status}</td>
               <td>{application.last_updated}</td>
-              <td>{application.school_last_attended}</td>
-              <td>{application.gpa}</td>
               <td>
                   <a href="/edit-applicant">Edit</a> 
               </td>

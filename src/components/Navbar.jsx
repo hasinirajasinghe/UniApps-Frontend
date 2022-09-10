@@ -9,14 +9,14 @@ const Navbar = ({setLoggedIn}) => {
     const handleLogout = () => {
         removeToken()
         setLoggedIn(false)
-        navigate('/login/')
+        navigate('/')
     }
 
 
     return (
         <nav className="navbar navbar-expand-md navbar-light" style={{backgroundColor:"#329ebc"}}>
-            <div className="container emphasis-font">
-                <Link to="/dashboard" className="navbar-brand" style={{fontFamily:"Poiret One", fontSize:"30px"}}>
+            <div className="container emphasis-font" style={{margin:"0px"}}>
+                <Link to="/dashboard" className="navbar-brand" style={{fontFamily:"Poiret One", fontSize:"30px", fontWeight:"bold"}}>
                     UniApps
                 </Link>
 
@@ -29,15 +29,15 @@ const Navbar = ({setLoggedIn}) => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navmenu">
+                <div className="collapse navbar-collapse" id="navmenu" style={{float:"right"}}>
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a href="/dashboard" className="nav-link">
-                                Dashboard
-                            </a>
-                            <a href="/dashboard" className="nav-link">
-                                <button onClick={handleLogout}>logout</button>
-                            </a>
+                        <Link to="/dashboard" className="navbar-brand">
+                            Dashboard
+                        </Link>
+                        </li>
+                        <li className="nav-item">
+                            <button onClick={handleLogout}>logout</button>
                         </li>
                     </ul>
                 </div>

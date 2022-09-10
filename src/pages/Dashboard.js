@@ -5,7 +5,7 @@ import Applications from "../components/Applications";
 const Dashboard = ({ applicants, applications }) => {
 
     return (
-        <div>
+        <div >
             <Applicants applicants={applicants} />
             <Applications applications={applications} />
         </div>
