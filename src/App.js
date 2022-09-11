@@ -1,7 +1,7 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import React, { useState, useEffect} from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from './components/Footer';
 import Dashboard from './pages/Dashboard';
 import RegisterPage from './pages/RegisterPage';
@@ -10,6 +10,7 @@ import AddNewApplicant from './pages/AddNewApplicant';
 import AddNewApplication from './pages/AddNewApplication';
 import EditApplicant from './pages/EditApplicant';
 import EditApplication from './pages/EditApplication';
+import ApplicantDetails from './pages/ApplicantDetails';
 import UniAppsNavbar from './components/UniAppsNavbar';
 import { getToken } from './utils/tokenService';
 
@@ -64,6 +65,7 @@ function App() {
           <Route path='/add-application' element={<AddNewApplication addNewApplication={addNewApplication} applicants={applicants}/>}/>
           <Route path='/edit-applicant/:id' element={<EditApplicant applicants={applicants} setApplicants={setApplicants}/>}/>
           <Route path='/edit-application/:id' element={<EditApplication applications={applications} setApplications={setApplications}/>}/>
+          <Route path='/applicant/:id' element={<ApplicantDetails applicants={applicants}/>}/>
         </Routes>
         <Footer />
     </div>

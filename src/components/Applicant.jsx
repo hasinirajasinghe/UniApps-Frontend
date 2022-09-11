@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 const Applicant = ({ applicant, deleteApplicant }) => {
     const onDeleteApplicant = () => {
@@ -21,7 +22,11 @@ const Applicant = ({ applicant, deleteApplicant }) => {
     return (
         <tbody style={{ fontSize: "12px", fontFamily: "sans-serif" }}>
             <tr>
-                <td>{applicant.name}</td>
+                <td>
+                    <Link to={`/applicant/${applicant.id}/`}>
+                        {applicant.name}
+                    </Link>
+                </td>
                 <td>{applicant.get_major_display}</td>
                 <td>{applicant.get_enrollment_status_display}</td>
                 <td>
