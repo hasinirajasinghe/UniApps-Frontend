@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 import "../App.css"
 
 
-const Applications = ({ applications }) => {
+const Applications = ({ applications, deleteApplication }) => {
     return (
         <div className="app-main-container">
             <div className="app-header-container">
@@ -26,7 +26,7 @@ const Applications = ({ applications }) => {
                         </tr>
                     </thead>
                     {applications.map((application) => {
-                        return <Application application={application} key={application.id}/>
+                        return <Application application={application} key={application.id} deleteApplication={deleteApplication}/>
                     })}
                 </Table>
             </div>

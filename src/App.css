@@ -40,11 +40,29 @@
   }
 }
 
-/*  Login */
+/*  Login and Register */
 .register-login-main-container {
   width: 370px;
   margin: 5% auto;
   background-color: #329ebc;
+}
+
+.register-login-main-container p {
+  font-family: "Poiret One";
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.register-login-main-container a {
+  text-decoration: none;
+  color: #f78503;
+  font-weight: bolder;
+}
+
+.register-login-main-container a:hover {
+  color: #f78503;
 }
 
 .register-login-sub-container {
@@ -109,4 +127,11 @@
 .app-table thead {
   font-size: 12px;
   top: 0;
+}
+
+/* Edit and Delete Buttons */
+.edit-button {
+  background-color: #8ecae6;
+  border-color: "#8ecae6";
+  font-weight: "bold";
 }

@@ -14,14 +14,14 @@ const EditApplicant = () => {
         enrollment_status: "",
     };
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
     const [toastMessage, setToastMessage] = useState('')
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState(initialState);
+    const { id } = useParams()
+    const navigate = useNavigate()
+    const [formData, setFormData] = useState(initialState)
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     };
 
     const handleSubmit = (e) => {
@@ -37,11 +37,11 @@ const EditApplicant = () => {
         .catch(error => {
           setToastMessage('Encountered error while saving!')
           setShow(true)
-        });
-    };
+        })
+    }
 
-    const majors = useRef([]);
-    const enrollment_statuses = useRef([]);
+    const majors = useRef([])
+    const enrollment_statuses = useRef([])
 
     useEffect(() => {
         axios.get(`http://localhost:8000/applicants/${id}/`).then((res) => {
@@ -49,7 +49,7 @@ const EditApplicant = () => {
         })
         .catch(error => {
           console.log(error);
-        }) ;
+        }) 
 
         fetch('http://localhost:8000/majors/')
         .then(res => res.json())
@@ -60,7 +60,7 @@ const EditApplicant = () => {
         .then(res => res.json())
         .then(data => enrollment_statuses.current = data)
         .catch(error => console.log(error))
-    }, [id]);
+    }, [id])
 
     return (
         <div>

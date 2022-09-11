@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
@@ -23,11 +23,23 @@ const AddNewApplicant = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/dashboard", formData).then((res) => {
+        axios.post("http://localhost:8000/applicants", formData).then((res) => {
             setFormData(initialState);
             navigate("/dashboard", { replace: true });
         });
     };
+
+    useEffect(() => {
+        fetch('http://localhost:8000/majors/')
+        .then(res => res.json())
+        .then(data => majors.current = data)
+        .catch(error => console.log(error))
+
+        fetch('http://localhost:8000/enrollment-statuses/')
+        .then(res => res.json())
+        .then(data => enrollment_statuses.current = data)
+        .catch(error => console.log(error))
+    }, [id])
 
     return (
         <div>
