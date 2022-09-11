@@ -34,7 +34,7 @@ const Dashboard = ({ applicants, applications, deleteApplicant, deleteApplicatio
     return (
         <div >
             <Applicants applicants={applicants} majors={majors} enrollment_statuses={enrollment_statuses} deleteApplicant={deleteApplicant}/>
-            <Applications applications={applications} majors={majors} terms={terms} application_statuses={application_statuses} deleteApplication={deleteApplication}/>
+            <Applications applicants={applicants} applications={applications} majors={majors} terms={terms} application_statuses={application_statuses} deleteApplication={deleteApplication}/>
         </div>
     )
 }

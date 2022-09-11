@@ -16,8 +16,8 @@ const AddNewApplicant = ({addNewApplicant}) => {
 
     const [show, setShow] = useState(false)
     const [toastMessage, setToastMessage] = useState('')
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState(initialState);
+    const navigate = useNavigate()
+    const [formData, setFormData] = useState(initialState)
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,8 +54,8 @@ const AddNewApplicant = ({addNewApplicant}) => {
             setFormData({...formData, 'enrollment_status': Object.keys(enrollmentStatusData)[0], 'major': Object.keys(majorsData)[0]})
           })
           .catch((err) => {
-              console.log(err);
-          });
+              console.log(err)
+          })
     },[])
 
     return (
@@ -134,7 +134,7 @@ const AddNewApplicant = ({addNewApplicant}) => {
                 </div>
             </Form>
             <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-            <Toast.Body>{toastMessage}</Toast.Body>
+                <Toast.Body>{toastMessage}</Toast.Body>
             </Toast>
         </div>
     );

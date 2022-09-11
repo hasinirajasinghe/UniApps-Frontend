@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
 
-const AddNewApplication = () => {
+const AddNewApplication = ({ applicants, addNewApplication }) => {
     const initialState = {
         applicant: "",
         academic_year: "",
@@ -17,22 +17,68 @@ const AddNewApplication = () => {
         gpa: "",
     };
 
+    const [show, setShow] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
     const navigate = useNavigate();
     const [formData, setFormData] = useState(initialState);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        let date = (new Date()).toISOString().split('T')[0];
+        
+        let data = formData
+        data['last_updated'] = date;
+
         axios
-            .post("http://localhost:3000/dashboard", formData)
+            .post("http://localhost:8000/applications/", data)
             .then((res) => {
-                setFormData(initialState);
-                navigate("/dashboard", { replace: true });
+                if (res.status >= 200 && res.status < 300) {
+                    addNewApplication(res.data);
+                    navigate("/dashboard", { replace: true });
+                } else {
+                    setToastMessage("Failed to create application!");
+                    setShow(true);
+                }
+            })
+            .catch((error) => {
+                setToastMessage(
+                    "Encountered error while creating application, please fill out all fields!"
+                );
+                setShow(true);
             });
     };
+
+    const majors = useRef([]);
+    const terms = useRef([]);
+    const application_statuses = useRef([]);
+
+    useEffect(() => {
+        Promise.all([
+            fetch("http://localhost:8000/majors/"),
+            fetch("http://localhost:8000/terms/"),
+            fetch("http://localhost:8000/application-statuses/"),
+        ])
+            .then(([majors, terms, application_statuses]) =>
+                Promise.all([
+                    majors.json(),
+                    terms.json(),
+                    application_statuses.json(),
+                ])
+            )
+            .then(([majorsData, termsData, applicationStatusData]) => {
+                majors.current = majorsData;
+                terms.current = termsData;
+                application_statuses.current = applicationStatusData;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     return (
         <div>
@@ -43,7 +89,16 @@ const AddNewApplication = () => {
                         label="Applicant Name"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange}></Form.Select>
+                        <Form.Select onChange={handleChange} name="applicant">
+                            <option>----</option>
+                            {applicants.map((applicant) => {
+                                return (
+                                    <option key={applicant.id} value={applicant.id}>
+                                        {applicant.name}
+                                    </option>
+                                );
+                            })}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -55,7 +110,7 @@ const AddNewApplication = () => {
                         <Form.Control
                             type="text"
                             placeholder="Academic year"
-                            name="academicyear"
+                            name="academic_year"
                             onChange={handleChange}
                         />
                     </FloatingLabel>
@@ -66,7 +121,21 @@ const AddNewApplication = () => {
                         label="Intended start term"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange}></Form.Select>
+                        <Form.Select
+                            onChange={handleChange}
+                            name="intended_start"
+                        >
+                            <option>----</option>
+                            {Object.entries(terms.current).map(
+                                ([key, value]) => {
+                                    return (
+                                        <option key={key} value={key}>
+                                            {value}
+                                        </option>
+                                    );
+                                }
+                            )}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -75,7 +144,21 @@ const AddNewApplication = () => {
                         label="Intended major"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange}></Form.Select>
+                        <Form.Select
+                            onChange={handleChange}
+                            name="intended_major"
+                        >
+                            <option>----</option>
+                            {Object.entries(majors.current).map(
+                                ([key, value]) => {
+                                    return (
+                                        <option key={key} value={key}>
+                                            {value}
+                                        </option>
+                                    );
+                                }
+                            )}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -84,21 +167,18 @@ const AddNewApplication = () => {
                         label="Enrollment Status"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange}></Form.Select>
-                    </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Last updated"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="date"
-                            placeholder="Last updated"
-                            name="lastupdated"
-                            onChange={handleChange}
-                        />
+                        <Form.Select onChange={handleChange} name="status">
+                            <option>----</option>
+                            {Object.entries(application_statuses.current).map(
+                                ([key, value]) => {
+                                    return (
+                                        <option key={key} value={key}>
+                                            {value}
+                                        </option>
+                                    );
+                                }
+                            )}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -110,7 +190,7 @@ const AddNewApplication = () => {
                         <Form.Control
                             type="text"
                             placeholder="School last attended"
-                            name="schoollastattended"
+                            name="school_last_attended"
                             onChange={handleChange}
                         />
                     </FloatingLabel>
@@ -123,8 +203,8 @@ const AddNewApplication = () => {
                     >
                         <Form.Control
                             type="number"
-                            placeholder="GPA"
                             name="gpa"
+                            placeholder="GPA"
                             min="0.000"
                             step="0.001"
                             max="4.000"
@@ -133,9 +213,17 @@ const AddNewApplication = () => {
                     </FloatingLabel>
                 </Form.Group>
                 <div>
-                    <Button>Submit</Button>
+                    <Button type="submit">Submit</Button>
                 </div>
             </Form>
+            <Toast
+                onClose={() => setShow(false)}
+                show={show}
+                delay={3000}
+                autohide
+            >
+                <Toast.Body>{toastMessage}</Toast.Body>
+            </Toast>
         </div>
     );
 };

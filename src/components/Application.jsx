@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 
-const Application = ({ application, deleteApplication }) => {
+const Application = ({ application, applicant, deleteApplication }) => {
     const onDeleteApplication = () => {
         axios
             .delete(`http://localhost:8000/applications/${application.id}/`)
@@ -21,7 +21,7 @@ const Application = ({ application, deleteApplication }) => {
     return (
         <tbody style={{ fontSize: "12px", fontFamily: "sans-serif" }}>
             <tr>
-                <td>{application.applicant}</td>
+                <td>{applicant.name}</td>
                 <td>{application.academic_year}</td>
                 <td>{application.get_intended_start_display}</td>
                 <td>{application.get_intended_major_display}</td>

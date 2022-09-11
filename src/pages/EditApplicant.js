@@ -143,7 +143,7 @@ const EditApplicant = () => {
                 </div>
             </Form>
             <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-            <Toast.Body>{toastMessage}</Toast.Body>
+                <Toast.Body>{toastMessage}</Toast.Body>
            </Toast>
         </div>
     );

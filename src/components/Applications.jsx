@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Application from "./Application";
 import Table from "react-bootstrap/Table";
 import "../App.css"
 
 
-const Applications = ({ applications, deleteApplication }) => {
+const Applications = ({ applicants, applications, deleteApplication }) => {
+    
+    const applicantIdToNameValues = {}
+
+    applicants.forEach(applicant => {
+        applicantIdToNameValues[applicant.id] = applicant;
+    });
+
     return (
         <div className="app-main-container">
             <div className="app-header-container">
@@ -26,7 +33,7 @@ const Applications = ({ applications, deleteApplication }) => {
                         </tr>
                     </thead>
                     {applications.map((application) => {
-                        return <Application application={application} key={application.id} deleteApplication={deleteApplication}/>
+                        return <Application applicant={applicantIdToNameValues[application.applicant]} application={application} key={application.id} deleteApplication={deleteApplication}/>
                     })}
                 </Table>
             </div>

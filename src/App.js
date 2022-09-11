@@ -61,7 +61,7 @@ function App() {
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/dashboard' element={loggedIn? (<Dashboard applicants={applicants} applications={applications} deleteApplicant={deleteApplicant} deleteApplication={deleteApplication} />) : (<Navigate replace to={'/login'}/>)}/>
           <Route path='/add-applicant' element={<AddNewApplicant addNewApplicant={addNewApplicant}/>}/>
-          <Route path='/add-application' element={<AddNewApplication addNewApplication={addNewApplication}/>}/>
+          <Route path='/add-application' element={<AddNewApplication addNewApplication={addNewApplication} applicants={applicants}/>}/>
           <Route path='/edit-applicant/:id' element={<EditApplicant applicants={applicants} setApplicants={setApplicants}/>}/>
           <Route path='/edit-application/:id' element={<EditApplication applications={applications} setApplications={setApplications}/>}/>
         </Routes>
