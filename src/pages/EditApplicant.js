@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
 
 const EditApplicant = () => {
@@ -14,26 +14,52 @@ const EditApplicant = () => {
         enrollment_status: "",
     };
 
+    const [show, setShow] = useState(false);
+    const [toastMessage, setToastMessage] = useState('')
     const { id } = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState(initialState);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/dashboard", formData).then((res) => {
-            setFormData(initialState);
-            navigate("/dashboard", { replace: true });
+        axios.put(`http://localhost:8000/applicants/${id}/`, formData).then((res) => {
+            if (res.status === 200) {
+              setToastMessage('Successfully Saved!')
+            } else {
+              setToastMessage('Failed to save!')
+            }
+            setShow(true)
+        })
+        .catch(error => {
+          setToastMessage('Encountered error while saving!')
+          setShow(true)
         });
     };
 
+    const majors = useRef([]);
+    const enrollment_statuses = useRef([]);
+
     useEffect(() => {
-        axios.get(`http://localhost:3000/dashboard/${id}`).then((res) => {
-            setFormData(res.data);
-        });
+        axios.get(`http://localhost:8000/applicants/${id}/`).then((res) => {
+            setFormData({'name':res.data.name, 'email':res.data.email, 'phone_number':res.data.phone_number, 'major':res.data.major, 'enrollment_status':res.data.enrollment_status});
+        })
+        .catch(error => {
+          console.log(error);
+        }) ;
+
+        fetch('http://localhost:8000/majors/')
+        .then(res => res.json())
+        .then(data => majors.current = data)
+        .catch(error => console.log(error))
+
+        fetch('http://localhost:8000/enrollment-statuses/')
+        .then(res => res.json())
+        .then(data => enrollment_statuses.current = data)
+        .catch(error => console.log(error))
     }, [id]);
 
     return (
@@ -49,6 +75,7 @@ const EditApplicant = () => {
                             type="text"
                             placeholder="Name"
                             name="name"
+                            value={formData?.name}
                             onChange={handleChange}
                         />
                     </FloatingLabel>
@@ -63,6 +90,7 @@ const EditApplicant = () => {
                             type="text"
                             placeholder="Email address"
                             name="email"
+                            value={formData?.email}
                             onChange={handleChange}
                         />
                     </FloatingLabel>
@@ -76,7 +104,8 @@ const EditApplicant = () => {
                         <Form.Control
                             type="text"
                             placeholder="Phone number"
-                            name="phonenumber"
+                            name="phone_number"
+                            value={formData?.phone_number}
                             onChange={handleChange}
                         />
                     </FloatingLabel>
@@ -87,7 +116,12 @@ const EditApplicant = () => {
                         label="Major"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange}></Form.Select>
+                        <Form.Select onChange={handleChange} name="major">
+                          <option key={formData?.major} value={formData?.major}>{majors.current[formData?.major]}</option>
+                          {Object.entries(majors.current).filter(([key]) => key !== formData.major).map(([key, value]) => {
+                            return (<option key={key} value={key}>{value}</option>)
+                          })}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -96,13 +130,21 @@ const EditApplicant = () => {
                         label="Enrollment status"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange}></Form.Select>
+                        <Form.Select onChange={handleChange} name="enrollment_status">
+                        <option key={formData?.enrollment_status} value={formData?.enrollment_status}>{enrollment_statuses.current[formData.enrollment_status]}</option>
+                          {Object.entries(enrollment_statuses.current).filter(([key]) => key !== formData.enrollment_status).map(([key, value]) => {
+                            return (<option key={key} value={key}>{value}</option>)
+                          })}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <div>
-                    <Button>Submit</Button>
+                    <Button type="submit">Submit</Button>
                 </div>
             </Form>
+            <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+            <Toast.Body>{toastMessage}</Toast.Body>
+           </Toast>
         </div>
     );
 };

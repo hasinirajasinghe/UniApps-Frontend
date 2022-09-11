@@ -16,7 +16,6 @@ const Login = ({ setLoggedIn }) => {
     const [loginCredentials, setLoginCredentials] = useState(initalState);
 
     const handleChange = (e) => {
-        console.log(e.target.name);
         setLoginCredentials({
             ...loginCredentials,
             [e.target.name]: e.target.value,
@@ -44,30 +43,13 @@ const Login = ({ setLoggedIn }) => {
     };
 
     return (
-        <div
-            class="shadow p-3 mb-5 rounded"
-            style={{
-                width: "370px",
-                margin: "5% auto",
-                backgroundColor: "#329ebc",
-            }}
-        >
-            <div
-                style={{
-                    textAlign: "center",
-                    margin: "30px 0",
-                    fontFamily: "Poiret One",
-                }}
-            >
-                <h2 style={{ fontSize: "35px", fontWeight: "bold" }}>
-                    Welcome to UniApps
-                </h2>
+        <div className="shadow p-3 mb-5 rounded register-login-main-container">
+            <div className="register-login-sub-container">
+                <h2 className="lregister-login-sub-container h2">Welcome to UniApps</h2>
             </div>
             <div
-                class="shadow p-3 mb-5 bg-white rounded"
-                style={{ height: "350px" }}
-            >
-                <Form style={{ marginTop: "40px" }} onSubmit={handleSubmitForm}>
+                className="shadow p-3 mb-5 bg-white rounded login-form-main-container">
+                <Form className="login-form " onSubmit={handleSubmitForm}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <FloatingLabel
                             controlId="floatingInput"
@@ -90,14 +72,14 @@ const Login = ({ setLoggedIn }) => {
                             className="mb-3"
                         >
                             <Form.Control
-                                type="text"
+                                type="password"
                                 placeholder="Password"
                                 name="password"
                                 onChange={handleChange}
                             />
                         </FloatingLabel>
                     </Form.Group>
-                    <div style={{ textAlign: "center" }}>
+                    <div className="login-button-title">
                         <Button
                             variant="primary"
                             type="submit"
@@ -110,20 +92,12 @@ const Login = ({ setLoggedIn }) => {
                         >
                             Login
                         </Button>
-                        <Button
-                            variant="primary"
-                            type="submit"
-                            style={{
-                                backgroundColor: "#ffb703",
-                                border: "#ffb703",
-                                fontWeight: "bold",
-                                margin: "10px",
-                            }}
-                        >
-                            Register
-                        </Button>
                     </div>
                 </Form>
+                <p>
+                    Don't have an account? <a href="/register">Register</a>{" "}
+                    today!
+                </p>
             </div>
         </div>
     );

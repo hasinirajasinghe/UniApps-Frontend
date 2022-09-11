@@ -1,17 +1,35 @@
+import axios from "axios";
 import React from "react";
 
-const Applicant = ({ applicant }) => {
+
+const Applicant = ({ applicant, deleteApplicant }) => {
+
+    const onDeleteApplicant = () => {
+        axios.delete(`http://localhost:8000/applicants/${applicant.id}/`).then((res) => {
+            if (res.status >= 200 && res.status < 300) {
+                deleteApplicant(applicant.id)
+            } else {
+                alert('Failed to delete!')
+            }
+        })
+        .catch(error => {
+            alert('Error while deleting!')
+        });
+    }
+
     return (
         <tbody style={{fontSize:"12px", fontFamily:"sans-serif"}}>
             <tr>
                 <td>{applicant.name}</td>
-                <td>{applicant.major}</td>
-                <td>{applicant.enrollment_status}</td>
+                <td>{applicant.get_major_display}</td>
+                <td>{applicant.get_enrollment_status_display}</td>
                 <td>
-                    <a href="/edit-applicant">Edit</a> 
+                    <button>
+                        <a href={`/edit-applicant/${applicant.id}`}>Edit</a> 
+                    </button>
                 </td>
                 <td>
-                    <a href="/delete-applicant">Delete</a> 
+                    <button onClick={onDeleteApplicant}>Delete</button>
                 </td>
             </tr>
         </tbody>

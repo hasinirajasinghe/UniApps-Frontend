@@ -34,47 +34,79 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
+/*  Login */
+.register-login-main-container {
+  width: 370px;
+  margin: 5% auto;
+  background-color: #329ebc;
+}
+
+.register-login-sub-container {
+  text-align: center;
+  margin: 30px 0;
+  font-family: "Poiret One";
+}
+
+.register-login-sub-container h2 {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.register-login-form-main-container {
+  height: 350px;
+}
+
+.login-form {
+  margin-top: 40px;
+}
+
+.login-button-title {
+  text-align: center;
+}
+
 /* Applicants and Applications */
 .app-main-container {
-  width:90vw;
-  margin:0 auto;
+  width: 90vw;
+  margin: 0 auto;
 }
 
 .app-header-container {
-  background-color:#329ebc;
-  border-top-left-radius:10px;
-  border-top-right-radius:10px;
+  background-color: #329ebc;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .app-header-container h1 {
-  display:inline;
-  font-family:"Poiret One";
+  display: inline;
+  font-family: "Poiret One";
   font-weight: bolder;
-  margin-left:15px;
+  margin-left: 15px;
   font-size: 29px;
 }
 
 .app-header-container a {
-  display:inline;
-  text-decoration:none;
-  float:right;
+  display: inline;
+  text-decoration: none;
+  float: right;
   color: black;
   font-size: 23px;
   font-weight: bolder;
-  padding-right:10px;
+  padding-right: 10px;
 }
 
 .app-table {
-  height:200px;
-  overflow:auto; 
-  width:90vw;
+  height: 200px;
+  overflow: scroll;
+  width: 90vw;
 }
 
 .app-table thead {
-  font-size:12px;
+  font-size: 12px;
+  top: 0;
 }

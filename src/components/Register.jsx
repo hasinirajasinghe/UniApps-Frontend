@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const initalState = {
@@ -11,35 +13,41 @@ const Register = () => {
         password_confirmation: "",
     };
 
+    const navigate = useNavigate()
     const [registration, setRegistration] = useState(initalState);
 
     const handleChange = (e) => {
-        console.log(e.target.name);
         setRegistration({ ...registration, [e.target.name]: e.target.value });
     };
 
+    const handleSubmitForm = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(
+                `http://localhost:8000/register/`,
+                registration
+            );
+            if (res.status === 200) {
+                navigate("/login");
+            } else {
+                console.log(res.data)
+                alert("Failed to register, please try again!!!");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Failed to register, please try again!");
+        }
+    };
+
     return (
-        <div
-            class="shadow p-3 mb-5 rounded"
-            style={{
-                width: "370px",
-                margin: "5% auto",
-                backgroundColor: "#329ebc",
-            }}
-        >
-            <div
-                style={{
-                    textAlign: "center",
-                    margin: "30px 0",
-                    fontFamily: "Poiret One",
-                }}
-            >
-                <h2 style={{ fontSize: "35px", fontWeight: "bold" }}>
+        <div className="shadow p-3 mb-5 rounded register-login-main-container"        >
+            <div className="register-login-sub-container">
+                <h2 className="register-login-sub-container h2">
                     Register
                 </h2>
             </div>
             <div>
-                <Form style={{ marginTop: "40px" }}>
+                <Form onSubmit={handleSubmitForm} style={{ marginTop: "40px" }}>
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <FloatingLabel
                             controlId="floatingInput"
@@ -77,7 +85,7 @@ const Register = () => {
                             className="mb-3"
                         >
                             <Form.Control
-                                type="text"
+                                type="password"
                                 placeholder="Password"
                                 name="password"
                                 onChange={handleChange}
@@ -92,7 +100,7 @@ const Register = () => {
                             className="mb-3"
                         >
                             <Form.Control
-                                type="text"
+                                type="password"
                                 placeholder="Password confirmation"
                                 name="password_confirmation"
                                 onChange={handleChange}
