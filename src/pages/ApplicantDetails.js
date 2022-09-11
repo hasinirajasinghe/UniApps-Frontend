@@ -1,15 +1,13 @@
-import React from 'react'
-import { FloatingLabel, Form } from 'react-bootstrap';
-import { useParams } from 'react-router-dom'
+import React from "react";
+import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
-const ApplicantDetails = ({applicants}) => {
+const ApplicantDetails = ({ applicants }) => {
+    const { id } = useParams();
+    const applicant = applicants.find((appl) => appl.id === parseInt(id));
 
-  const { id } = useParams();
-  const applicant = applicants.find((appl) => appl.id === parseInt(id));
-
-
-  return (
-   <div>
+    return (
+        <div>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <FloatingLabel
@@ -81,7 +79,7 @@ const ApplicantDetails = ({applicants}) => {
                         label="Enrollment status"
                         className="mb-3"
                     >
-                      <Form.Control
+                        <Form.Control
                             type="text"
                             placeholder="Enrollment status"
                             name="enrollment_status"
@@ -92,8 +90,37 @@ const ApplicantDetails = ({applicants}) => {
                     </FloatingLabel>
                 </Form.Group>
             </Form>
+            <Button
+                        type="submit"
+                        className="btn-sm"
+                        style={{
+                            backgroundColor: "#8ecae6",
+                            border: "#8ecae6",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        <a
+                            style={{ color: "#FFFFFF", textDecoration: "none" }}
+                            href={`/edit-applicant/${applicant.id}`}
+                        >
+                            Edit
+                        </a>
+                    </Button>
+                    <Button
+                    // TODO: pass along the function
+                        // onClick={onDeleteApplicant}
+                        type="submit"
+                        className="btn-sm"
+                        style={{
+                            backgroundColor: "#d62928",
+                            border: "#d62928",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        Delete
+                    </Button>
         </div>
-  )
-}
+    );
+};
 
-export default ApplicantDetails
+export default ApplicantDetails;

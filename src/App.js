@@ -11,6 +11,7 @@ import AddNewApplication from './pages/AddNewApplication';
 import EditApplicant from './pages/EditApplicant';
 import EditApplication from './pages/EditApplication';
 import ApplicantDetails from './pages/ApplicantDetails';
+import ApplicationDetails from "./pages/ApplicationDetails";
 import UniAppsNavbar from './components/UniAppsNavbar';
 import { getToken } from './utils/tokenService';
 
@@ -66,6 +67,7 @@ function App() {
           <Route path='/edit-applicant/:id' element={<EditApplicant applicants={applicants} setApplicants={setApplicants}/>}/>
           <Route path='/edit-application/:id' element={<EditApplication applications={applications} setApplications={setApplications}/>}/>
           <Route path='/applicant/:id' element={<ApplicantDetails applicants={applicants}/>}/>
+          <Route path='/application/:id' element={<ApplicationDetails applicants={applicants} applications={applications}/>}/>
         </Routes>
         <Footer />
     </div>
