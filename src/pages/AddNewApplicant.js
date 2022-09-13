@@ -59,7 +59,8 @@ const AddNewApplicant = ({addNewApplicant}) => {
     },[])
 
     return (
-        <div>
+        <div className="shadow-lg p-3 mb-5 bg-white create-main-container">
+            <h2 className="create-main-container h2">Add New Applicant</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <FloatingLabel
@@ -129,11 +130,11 @@ const AddNewApplicant = ({addNewApplicant}) => {
                         </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
-                <div>
-                    <Button type="submit">Submit</Button>
+                <div className="create-form-button-title">
+                    <Button className="create-submit-button" type="submit">Submit</Button>
                 </div>
             </Form>
-            <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+            <Toast className="toast toast_container" onClose={() => setShow(false)} show={show} delay={3000} autohide>
                 <Toast.Body>{toastMessage}</Toast.Body>
             </Toast>
         </div>

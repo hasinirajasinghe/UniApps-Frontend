@@ -40,6 +40,24 @@
   }
 }
 
+/* Navbar */
+.nav-main-container {
+  background-color:#329ebc;
+}
+
+.nav-brand {
+  font-family:"Poiret One";
+  font-size:30px;
+  font-weight: bolder;
+}
+
+.nav-links {
+  width: 100%;
+  font-family:"Poiret One";
+  font-size:21px;
+  font-weight:bolder
+}
+
 /*  Login and Register */
 .register-login-main-container {
   width: 370px;
@@ -63,6 +81,7 @@
 
 .register-login-main-container a:hover {
   color: #f78503;
+  text-decoration: underline;
 }
 
 .register-login-sub-container {
@@ -76,12 +95,16 @@
   font-weight: bold;
 }
 
-.register-login-form-main-container {
-  height: 350px;
+.register-form-main-container {
+  height: 415px;
 }
 
-.login-form {
+.register-login-form-margin {
   margin-top: 40px;
+}
+
+.login-form-main-container {
+  height: 340px;
 }
 
 .login-button-title {
@@ -118,6 +141,10 @@
   padding-right: 10px;
 }
 
+.app-header-container a:hover {
+  color: #1d4e89;
+}
+
 .app-table {
   height: 200px;
   overflow: scroll;
@@ -129,9 +156,148 @@
   top: 0;
 }
 
+.app-name {
+  color: #329ebc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.app-name:hover {
+  color: #329ebc;
+  text-decoration: underline;
+}
+
 /* Edit and Delete Buttons */
 .edit-button {
   background-color: #8ecae6;
-  border-color: "#8ecae6";
-  font-weight: "bold";
+  border-color: #8ecae6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.edit-button:hover {
+  background-color: #7eb7d2;
+  border-color: #7eb7d2;
+}
+
+.delete-button {
+  background-color: #d62928;
+  border-color: #d62928;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.delete-button:hover {
+  background-color: #c02424;
+  border-color: #c02424;
+}
+
+/* Create Form */
+.create-main-container {
+  width: 600px;
+  margin: 5% auto;
+}
+
+.create-main-container h2 {
+  font-family: "Poiret One";
+  font-weight: bolder;
+  color: #329ebc;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.create-submit-button {
+  background-color: #8ecae6;
+  border-color: #8ecae6;
+  font-weight: bold;
+}
+
+.create-submit-button:hover {
+  background-color: #7eb7d2;
+  border-color: #7eb7d2;
+}
+
+.create-submit-button:focus {
+  background-color: #7eb7d2;
+  border-color: #7eb7d2;
+  border-style: none;
+}
+
+.create-form-button-title {
+  text-align: center;
+}
+
+/* Edit Form */
+.edit-main-container {
+  width: 600px;
+  margin: 5% auto;
+}
+
+.edit-main-container h2 {
+  font-family: "Poiret One";
+  font-weight: bolder;
+  color: #329ebc;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.edit-submit-button {
+  background-color: #8ecae6;
+  border-color: #8ecae6;
+  font-weight: bold;
+}
+
+.edit-submit-button:hover {
+  background-color: #7eb7d2;
+  border-color: #7eb7d2;
+}
+
+.edit-form-button-title {
+  text-align: center;
+}
+
+/* Detail Pages */
+.detail-main-container {
+  width: 450px;
+  margin: 5% auto;
+}
+
+.detail-buttons-container {
+  text-align: center;
+}
+
+.detail-buttons {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.detail-main-container h2 {
+  font-family: "Poiret One";
+  font-weight: bolder;
+  color: #329ebc;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Toast */
+.toast_container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 40px;
+  border: 1px solid #329ebc;
+}
+
+/* Footer */
+.footer {
+  font-family:"Poiret One";
+  font-size: 17px;
+  font-weight: bolder; 
+  color: #329ebc;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }

@@ -17,69 +17,82 @@ const EditApplication = () => {
         gpa: "",
     };
 
-
-    const [show, setShow] = useState(false)
-    const [toastMessage, setToastMessage] = useState('')
-    const { id } = useParams()
-    const navigate = useNavigate()
-    const [formData, setFormData] = useState(initialState)
+    const [show, setShow] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState(initialState);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        let date = (new Date()).toISOString().split('T')[0];
-        
-        let data = formData
-        data['last_updated'] = date;
+        let date = new Date().toISOString().split("T")[0];
 
-        axios.put(`http://localhost:8000/applications/${id}/`, data).then((res) => {
-            if (res.status === 200) {
-              setToastMessage('Successfully Saved!')
-            } else {
-              setToastMessage('Failed to save!')
-            }
-            setShow(true)
-        })
-        .catch(error => {
-          setToastMessage('Encountered error while saving!')
-          setShow(true)
-        })
-    }
+        let data = formData;
+        data["last_updated"] = date;
+
+        axios
+            .put(`http://localhost:8000/applications/${id}/`, data)
+            .then((res) => {
+                if (res.status === 200) {
+                    setToastMessage("Successfully Saved!");
+                } else {
+                    setToastMessage("Failed to save!");
+                }
+                setShow(true);
+            })
+            .catch((error) => {
+                setToastMessage("Encountered error while saving!");
+                setShow(true);
+            });
+    };
 
     const majors = useRef([]);
     const terms = useRef([]);
-    const application_statuses = useRef([])
+    const application_statuses = useRef([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/applications/${id}/`).then((res) => {
-            setFormData({'applicant':res.data.applicant, 'academic_year':res.data.academic_year, 'intended_start':res.data.intended_start, 'intended_major':res.data.intended_major, 'status':res.data.status, 'school_last_attended':res.data.school_last_attended, 'gpa':res.data.gpa, 'last_updated': res.data.last_updated});
-        })
-        .catch(error => {
-          console.log(error);
-        }) 
+        axios
+            .get(`http://localhost:8000/applications/${id}/`)
+            .then((res) => {
+                setFormData({
+                    applicant: res.data.applicant,
+                    academic_year: res.data.academic_year,
+                    intended_start: res.data.intended_start,
+                    intended_major: res.data.intended_major,
+                    status: res.data.status,
+                    school_last_attended: res.data.school_last_attended,
+                    gpa: res.data.gpa,
+                    last_updated: res.data.last_updated,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
-        fetch('http://localhost:8000/majors/')
-        .then(res => res.json())
-        .then(data => majors.current = data)
-        .catch(error => console.log(error))
+        fetch("http://localhost:8000/majors/")
+            .then((res) => res.json())
+            .then((data) => (majors.current = data))
+            .catch((error) => console.log(error));
 
-        fetch('http://localhost:8000/application-statuses/')
-        .then(res => res.json())
-        .then(data => application_statuses.current = data)
-        .catch(error => console.log(error))
+        fetch("http://localhost:8000/application-statuses/")
+            .then((res) => res.json())
+            .then((data) => (application_statuses.current = data))
+            .catch((error) => console.log(error));
 
-        fetch('http://localhost:8000/terms/')
-        .then(res => res.json())
-        .then(data => terms.current = data)
-        .catch(error => console.log(error))
-    }, [id])
+        fetch("http://localhost:8000/terms/")
+            .then((res) => res.json())
+            .then((data) => (terms.current = data))
+            .catch((error) => console.log(error));
+    }, [id]);
 
     return (
-        <div>
+        <div className="shadow-lg p-3 mb-5 bg-white edit-main-container">
+            <h2 className="edit-main-container h2">Edit Application</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <FloatingLabel
@@ -117,12 +130,26 @@ const EditApplication = () => {
                         label="Intended start term"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange} name="intended_start">
-                        <option key={formData?.intended_start} value={formData?.intended_start}>{terms.current[formData?.intended_start]}</option>
-                          {Object.entries(terms.current).filter(([key]) => key !== formData.major).map(([key, value]) => {
-                            return (<option key={key} value={key}>{value}</option>)
-                          })}
-                          </Form.Select>
+                        <Form.Select
+                            onChange={handleChange}
+                            name="intended_start"
+                        >
+                            <option
+                                key={formData?.intended_start}
+                                value={formData?.intended_start}
+                            >
+                                {terms.current[formData?.intended_start]}
+                            </option>
+                            {Object.entries(terms.current)
+                                .filter(([key]) => key !== formData.major)
+                                .map(([key, value]) => {
+                                    return (
+                                        <option key={key} value={key}>
+                                            {value}
+                                        </option>
+                                    );
+                                })}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -131,12 +158,28 @@ const EditApplication = () => {
                         label="Intended major"
                         className="mb-3"
                     >
-                        <Form.Select onChange={handleChange} name="intended_major">
-                        <option key={formData?.intended_major} value={formData?.intended_major}>{majors.current[formData?.intended_major]}</option>
-                          {Object.entries(majors.current).filter(([key]) => key !== formData.intended_major).map(([key, value]) => {
-                            return (<option key={key} value={key}>{value}</option>)
-                          })}
-                          </Form.Select>
+                        <Form.Select
+                            onChange={handleChange}
+                            name="intended_major"
+                        >
+                            <option
+                                key={formData?.intended_major}
+                                value={formData?.intended_major}
+                            >
+                                {majors.current[formData?.intended_major]}
+                            </option>
+                            {Object.entries(majors.current)
+                                .filter(
+                                    ([key]) => key !== formData.intended_major
+                                )
+                                .map(([key, value]) => {
+                                    return (
+                                        <option key={key} value={key}>
+                                            {value}
+                                        </option>
+                                    );
+                                })}
+                        </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -146,10 +189,21 @@ const EditApplication = () => {
                         className="mb-3"
                     >
                         <Form.Select onChange={handleChange} name="status">
-                        <option key={formData?.status} value={formData?.status}>{application_statuses.current[formData.status]}</option>
-                          {Object.entries(application_statuses.current).filter(([key]) => key !== formData.status).map(([key, value]) => {
-                            return (<option key={key} value={key}>{value}</option>)
-                          })}
+                            <option
+                                key={formData?.status}
+                                value={formData?.status}
+                            >
+                                {application_statuses.current[formData.status]}
+                            </option>
+                            {Object.entries(application_statuses.current)
+                                .filter(([key]) => key !== formData.status)
+                                .map(([key, value]) => {
+                                    return (
+                                        <option key={key} value={key}>
+                                            {value}
+                                        </option>
+                                    );
+                                })}
                         </Form.Select>
                     </FloatingLabel>
                 </Form.Group>
@@ -186,11 +240,17 @@ const EditApplication = () => {
                         />
                     </FloatingLabel>
                 </Form.Group>
-                <div>
-                    <Button type="submit">Submit</Button>
+                <div className="edit-form-button-title">
+                    <Button className="edit-submit-button" type="submit">Submit</Button>
                 </div>
             </Form>
-            <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+            <Toast
+                className="toast toast_container"
+                onClose={() => setShow(false)}
+                show={show}
+                delay={3000}
+                autohide
+            >
                 <Toast.Body>{toastMessage}</Toast.Body>
             </Toast>
         </div>

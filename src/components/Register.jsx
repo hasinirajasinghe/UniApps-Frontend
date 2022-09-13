@@ -46,8 +46,8 @@ const Register = () => {
                     Register
                 </h2>
             </div>
-            <div>
-                <Form onSubmit={handleSubmitForm} style={{ marginTop: "40px" }}>
+            <div className="shadow p-3 mb-5 bg-white rounded register-form-main-container">
+                <Form onSubmit={handleSubmitForm} className="register-login-form-margin">
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <FloatingLabel
                             controlId="floatingInput"

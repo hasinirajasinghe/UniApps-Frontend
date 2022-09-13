@@ -1,13 +1,34 @@
+import axios from "axios";
 import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ApplicantDetails = ({ applicants }) => {
+const ApplicantDetails = ({ applicants, deleteApplicant }) => {
+
+    const navigate = useNavigate()
+
+    const onDeleteApplicant = () => {
+        axios
+            .delete(`http://localhost:8000/applicants/${applicant.id}/`)
+            .then((res) => {
+                if (res.status >= 200 && res.status < 300) {
+                    deleteApplicant(applicant.id)
+                    navigate('/dashboard')
+                } else {
+                    alert("Failed to delete!")
+                }
+            })
+            .catch((error) => {
+                alert("Error while deleting!")
+            })
+    }
+
     const { id } = useParams();
     const applicant = applicants.find((appl) => appl.id === parseInt(id));
 
     return (
-        <div>
+        <div className="shadow-lg p-3 mb-5 bg-white detail-main-container">
+            <h2 className="detail-main-container h2">Applicant Details</h2>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <FloatingLabel
@@ -90,35 +111,22 @@ const ApplicantDetails = ({ applicants }) => {
                     </FloatingLabel>
                 </Form.Group>
             </Form>
-            <Button
-                        type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#8ecae6",
-                            border: "#8ecae6",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        <a
-                            style={{ color: "#FFFFFF", textDecoration: "none" }}
-                            href={`/edit-applicant/${applicant.id}`}
-                        >
-                            Edit
-                        </a>
-                    </Button>
-                    <Button
-                    // TODO: pass along the function
-                        // onClick={onDeleteApplicant}
-                        type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#d62928",
-                            border: "#d62928",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Delete
-                    </Button>
+            <div className="detail-buttons-container">
+                <Button
+                    type="submit"
+                    className="btn-sm edit-button detail-buttons"
+                    href={`/edit-applicant/${applicant.id}`}
+                >
+                    Edit
+                </Button>
+                <Button
+                    onClick={onDeleteApplicant}
+                    type="submit"
+                    className="btn-sm delete-button detail-buttons"
+                >
+                    Delete
+                </Button>
+            </div>
         </div>
     );
 };

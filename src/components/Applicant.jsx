@@ -16,14 +16,14 @@ const Applicant = ({ applicant, deleteApplicant }) => {
             })
             .catch((error) => {
                 alert("Error while deleting!");
-            });
-    };
+            })
+    }
 
     return (
         <tbody style={{ fontSize: "12px", fontFamily: "sans-serif" }}>
             <tr>
                 <td>
-                    <Link to={`/applicant/${applicant.id}/`}>
+                    <Link className="app-name" to={`/applicant/${applicant.id}/`}>
                         {applicant.name}
                     </Link>
                 </td>
@@ -32,38 +32,24 @@ const Applicant = ({ applicant, deleteApplicant }) => {
                 <td>
                     <Button
                         type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#8ecae6",
-                            border: "#8ecae6",
-                            fontWeight: "bold",
-                        }}
+                        className="btn-sm edit-button"
+                        href={`/edit-applicant/${applicant.id}`}
                     >
-                        <a
-                            style={{ color: "#FFFFFF", textDecoration: "none" }}
-                            href={`/edit-applicant/${applicant.id}`}
-                        >
                             Edit
-                        </a>
                     </Button>
                 </td>
                 <td>
                     <Button
                         onClick={onDeleteApplicant}
                         type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#d62928",
-                            border: "#d62928",
-                            fontWeight: "bold",
-                        }}
+                        className="btn-sm delete-button"
                     >
                         Delete
                     </Button>
                 </td>
             </tr>
         </tbody>
-    );
-};
+    )
+}
 
 export default Applicant;

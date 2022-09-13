@@ -81,7 +81,8 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
     }, []);
 
     return (
-        <div>
+        <div className="shadow-lg p-3 mb-5 bg-white create-main-container">
+            <h2 className="create-main-container h2">Add New Application</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <FloatingLabel
@@ -90,7 +91,7 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
                         className="mb-3"
                     >
                         <Form.Select onChange={handleChange} name="applicant">
-                            <option>----</option>
+                            <option>---</option>
                             {applicants.map((applicant) => {
                                 return (
                                     <option key={applicant.id} value={applicant.id}>
@@ -125,7 +126,7 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
                             onChange={handleChange}
                             name="intended_start"
                         >
-                            <option>----</option>
+                            <option>---</option>
                             {Object.entries(terms.current).map(
                                 ([key, value]) => {
                                     return (
@@ -148,7 +149,7 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
                             onChange={handleChange}
                             name="intended_major"
                         >
-                            <option>----</option>
+                            <option>---</option>
                             {Object.entries(majors.current).map(
                                 ([key, value]) => {
                                     return (
@@ -168,7 +169,7 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
                         className="mb-3"
                     >
                         <Form.Select onChange={handleChange} name="status">
-                            <option>----</option>
+                            <option>---</option>
                             {Object.entries(application_statuses.current).map(
                                 ([key, value]) => {
                                     return (
@@ -212,11 +213,12 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
                         />
                     </FloatingLabel>
                 </Form.Group>
-                <div>
-                    <Button type="submit">Submit</Button>
+                <div className="create-form-button-title">
+                    <Button className="create-submit-button" type="submit">Submit</Button>
                 </div>
             </Form>
             <Toast
+                className="toast toast_container"
                 onClose={() => setShow(false)}
                 show={show}
                 delay={3000}

@@ -11,14 +11,14 @@ const UniAppsNavbar = ({ loggedIn, setLoggedIn }) => {
     };
 
     return (
-        <Navbar bg="#329ebc" expand="lg" style={{backgroundColor:"#329ebc"}}>
+        <Navbar expand="lg" className="nav-main-container">
             <Container>
-                <Navbar.Brand href="#home" style={{fontFamily:"Poiret One", fontSize:"30px", fontWeight:"bold"}}>UniApps</Navbar.Brand>
+                <Navbar.Brand href="/dashboard" className="nav-brand">UniApps</Navbar.Brand>
                 {loggedIn ?
                 <>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="justify-content-end" style={{ width: "100%", fontFamily:"Poiret One", fontSize:"20px", fontWeight:"bolder"}}>
+                        <Nav className="justify-content-end nav-links ">
                             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                             <Nav.Link href="/" onClick={() => {}}>
                                 Logout

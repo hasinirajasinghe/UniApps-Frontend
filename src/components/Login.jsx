@@ -49,7 +49,7 @@ const Login = ({ setLoggedIn }) => {
             </div>
             <div
                 className="shadow p-3 mb-5 bg-white rounded login-form-main-container">
-                <Form className="login-form " onSubmit={handleSubmitForm}>
+                <Form className="register-login-form-margin" onSubmit={handleSubmitForm}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <FloatingLabel
                             controlId="floatingInput"

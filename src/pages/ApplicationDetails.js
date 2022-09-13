@@ -1,8 +1,28 @@
+import axios from "axios";
 import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ApplicationDetails = ({ applicants, applications }) => {
+const ApplicationDetails = ({ applicants, applications, deleteApplication }) => {
+    
+    const navigate = useNavigate()
+
+    const onDeleteApplication = () => {
+        axios
+            .delete(`http://localhost:8000/applications/${application.id}/`)
+            .then((res) => {
+                if (res.status >= 200 && res.status < 300) {
+                    deleteApplication(application.id)
+                    navigate('/dashboard')
+                } else {
+                    alert("Failed to delete!")
+                }
+            })
+            .catch((error) => {
+                alert("Error while deleting!")
+            });
+    };
+
     const { id } = useParams();
     const application = applications.find((appl) => appl.id === parseInt(id));
     const applicant = applicants.find(
@@ -10,7 +30,8 @@ const ApplicationDetails = ({ applicants, applications }) => {
     );
 
     return (
-        <div>
+        <div className="shadow-lg p-3 mb-5 bg-white detail-main-container">
+            <h2 className="detail-main-container h2">Application Details</h2>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <FloatingLabel
@@ -48,7 +69,7 @@ const ApplicationDetails = ({ applicants, applications }) => {
                         label="Intended start term"
                         className="mb-3"
                     >
-                      <Form.Control
+                        <Form.Control
                             type="text"
                             name="intended_start"
                             readOnly
@@ -78,7 +99,7 @@ const ApplicationDetails = ({ applicants, applications }) => {
                         label="Application Status"
                         className="mb-3"
                     >
-                      <Form.Control
+                        <Form.Control
                             type="text"
                             name="intended_major"
                             readOnly
@@ -93,7 +114,7 @@ const ApplicationDetails = ({ applicants, applications }) => {
                         label="School last attended"
                         className="mb-3"
                     >
-                         <Form.Control
+                        <Form.Control
                             type="text"
                             name="school_last_attended"
                             readOnly
@@ -117,35 +138,22 @@ const ApplicationDetails = ({ applicants, applications }) => {
                     </FloatingLabel>
                 </Form.Group>
             </Form>
-            <Button
-                        type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#8ecae6",
-                            border: "#8ecae6",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        <a
-                            style={{ color: "#FFFFFF", textDecoration: "none" }}
-                            href={`/edit-application/${application.id}`}
-                        >
-                            Edit
-                        </a>
-                    </Button>
-                    <Button
-                    // TODO: pass long function 
-                        // onClick={onDeleteApplication}
-                        type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#d62928",
-                            border: "#d62928",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Delete
-                    </Button>
+            <div className="detail-buttons-container">
+                <Button
+                    type="submit"
+                    className="btn-sm edit-button detail-buttons"
+                    href={`/edit-application/${application.id}`}
+                >
+                    Edit
+                </Button>
+                <Button
+                    onClick={onDeleteApplication}
+                    type="submit"
+                    className="btn-sm delete-button detail-buttons"
+                >
+                    Delete
+                </Button>
+            </div>
         </div>
     );
 };

@@ -23,7 +23,10 @@ const Application = ({ application, applicant, deleteApplication }) => {
         <tbody style={{ fontSize: "12px", fontFamily: "sans-serif" }}>
             <tr>
                 <td>
-                    <Link to={`/application/${application.id}/`}>
+                    <Link
+                        className="app-name"
+                        to={`/application/${application.id}/`}
+                    >
                         {applicant.name}
                     </Link>
                 </td>
@@ -35,31 +38,17 @@ const Application = ({ application, applicant, deleteApplication }) => {
                 <td>
                     <Button
                         type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#8ecae6",
-                            border: "#8ecae6",
-                            fontWeight: "bold",
-                        }}
+                        className="btn-sm edit-button"
+                        href={`/edit-application/${application.id}`}
                     >
-                        <a
-                            style={{ color: "#FFFFFF", textDecoration: "none" }}
-                            href={`/edit-application/${application.id}`}
-                        >
-                            Edit
-                        </a>
+                        Edit
                     </Button>
                 </td>
                 <td>
                     <Button
                         onClick={onDeleteApplication}
                         type="submit"
-                        className="btn-sm"
-                        style={{
-                            backgroundColor: "#d62928",
-                            border: "#d62928",
-                            fontWeight: "bold",
-                        }}
+                        className="btn-sm delete-button"
                     >
                         Delete
                     </Button>
