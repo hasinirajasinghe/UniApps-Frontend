@@ -47,20 +47,21 @@
 
 .nav-brand {
   font-family:"Poiret One";
-  font-size:30px;
+  font-size:45px;
   font-weight: bolder;
 }
 
 .nav-links {
   width: 100%;
   font-family:"Poiret One";
-  font-size:21px;
+  font-size:30px;
   font-weight:bolder
 }
 
 /*  Login and Register */
 .register-login-main-container {
-  width: 370px;
+  width: 450px;
+  height: 600px;
   margin: 5% auto;
   background-color: #329ebc;
 }
@@ -104,7 +105,7 @@
 }
 
 .login-form-main-container {
-  height: 340px;
+  height: 400px;
 }
 
 .login-button-title {
@@ -121,6 +122,7 @@
   background-color: #329ebc;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  padding: 10px 0;
 }
 
 .app-header-container h1 {
@@ -128,7 +130,7 @@
   font-family: "Poiret One";
   font-weight: bolder;
   margin-left: 15px;
-  font-size: 29px;
+  font-size: 30px;
 }
 
 .app-header-container a {
@@ -136,9 +138,11 @@
   text-decoration: none;
   float: right;
   color: black;
-  font-size: 23px;
+  font-size: 30px;
   font-weight: bolder;
-  padding-right: 10px;
+  margin: 0;
+  padding: 0;
+  padding-right: 15px;
 }
 
 .app-header-container a:hover {
@@ -146,13 +150,15 @@
 }
 
 .app-table {
-  height: 200px;
+  height: 300px;
   overflow: scroll;
   width: 90vw;
 }
 
 .app-table thead {
-  font-size: 12px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: #c7c7c7;
+  font-size: 20px;
   top: 0;
 }
 
@@ -197,11 +203,13 @@
 .create-main-container {
   width: 600px;
   margin: 5% auto;
+  font-size: 18px;
 }
 
 .create-main-container h2 {
   font-family: "Poiret One";
   font-weight: bolder;
+  font-size: 40px;
   color: #329ebc;
   text-align: center;
   padding: 20px 0;
@@ -232,11 +240,13 @@
 .edit-main-container {
   width: 600px;
   margin: 5% auto;
+  font-size: 18px;
 }
 
 .edit-main-container h2 {
   font-family: "Poiret One";
   font-weight: bolder;
+  font-size: 40px;
   color: #329ebc;
   text-align: center;
   padding: 20px 0;
@@ -259,8 +269,10 @@
 
 /* Detail Pages */
 .detail-main-container {
-  width: 450px;
+  width: 500px;
   margin: 5% auto;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 19px;
 }
 
 .detail-buttons-container {
@@ -275,6 +287,7 @@
 .detail-main-container h2 {
   font-family: "Poiret One";
   font-weight: bolder;
+  font-size: 40px;
   color: #329ebc;
   text-align: center;
   padding: 20px 0;
@@ -292,12 +305,43 @@
 /* Footer */
 .footer {
   font-family:"Poiret One";
-  font-size: 17px;
+  font-size: 28px;
   font-weight: bolder; 
   color: #329ebc;
-  text-align: center;
-  position: fixed;
+  text-align: left;
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+/* Analytics */
+.analytics-main-container {
+  width: 90vw;
+  margin: 50px auto;
+}
+
+.analytics-header-container {
+  background-color: #329ebc;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px 0;
+}
+
+.analytics-header-container h1 {
+  display: inline;
+  font-family: "Poiret One";
+  font-weight: bolder;
+  font-size: 18px;
+  margin-left: 15px;
+  font-size: 29px;
+}
+
+.analytics-charts-container {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.analytics-sub-containers {
+  width: 300px;
+  display: block;
 }

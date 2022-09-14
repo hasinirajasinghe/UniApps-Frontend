@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import Analytics from '../components/Analytics';
 import Applicants from "../components/Applicants";
 import Applications from "../components/Applications";
 
@@ -33,6 +34,7 @@ const Dashboard = ({ applicants, applications, deleteApplicant, deleteApplicatio
 
     return (
         <div >
+            <Analytics applicants={applicants} applications={applications}/>
             <Applicants applicants={applicants} majors={majors} enrollment_statuses={enrollment_statuses} deleteApplicant={deleteApplicant}/>
             <Applications applicants={applicants} applications={applications} majors={majors} terms={terms} application_statuses={application_statuses} deleteApplication={deleteApplication}/>
         </div>

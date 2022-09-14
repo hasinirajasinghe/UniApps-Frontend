@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ApplicantDetails = ({ applicants, deleteApplicant }) => {
 
@@ -59,7 +59,7 @@ const ApplicantDetails = ({ applicants, deleteApplicant }) => {
                             readOnly
                             plaintext
                             value={applicant?.email}
-                        />
+                        /> 
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
@@ -114,7 +114,7 @@ const ApplicantDetails = ({ applicants, deleteApplicant }) => {
             <div className="detail-buttons-container">
                 <Button
                     type="submit"
-                    className="btn-sm edit-button detail-buttons"
+                    className="btn-lg edit-button detail-buttons"
                     href={`/edit-applicant/${applicant.id}`}
                 >
                     Edit
@@ -122,7 +122,7 @@ const ApplicantDetails = ({ applicants, deleteApplicant }) => {
                 <Button
                     onClick={onDeleteApplicant}
                     type="submit"
-                    className="btn-sm delete-button detail-buttons"
+                    className="btn-lg delete-button detail-buttons"
                 >
                     Delete
                 </Button>

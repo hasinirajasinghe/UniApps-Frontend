@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
 
@@ -20,7 +20,6 @@ const EditApplication = () => {
     const [show, setShow] = useState(false);
     const [toastMessage, setToastMessage] = useState("");
     const { id } = useParams();
-    const navigate = useNavigate();
     const [formData, setFormData] = useState(initialState);
 
     const handleChange = (e) => {
@@ -241,7 +240,7 @@ const EditApplication = () => {
                     </FloatingLabel>
                 </Form.Group>
                 <div className="edit-form-button-title">
-                    <Button className="edit-submit-button" type="submit">Submit</Button>
+                    <Button className="btn-lg edit-submit-button" type="submit">Submit</Button>
                 </div>
             </Form>
             <Toast

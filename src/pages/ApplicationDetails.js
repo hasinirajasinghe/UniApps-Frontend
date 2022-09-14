@@ -141,7 +141,7 @@ const ApplicationDetails = ({ applicants, applications, deleteApplication }) => 
             <div className="detail-buttons-container">
                 <Button
                     type="submit"
-                    className="btn-sm edit-button detail-buttons"
+                    className="btn-lg edit-button detail-buttons"
                     href={`/edit-application/${application.id}`}
                 >
                     Edit
@@ -149,7 +149,7 @@ const ApplicationDetails = ({ applicants, applications, deleteApplication }) => 
                 <Button
                     onClick={onDeleteApplication}
                     type="submit"
-                    className="btn-sm delete-button detail-buttons"
+                    className="btn-lg delete-button detail-buttons"
                 >
                     Delete
                 </Button>

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
-import { setToken } from "../utils/tokenService";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
-const Login = ({ setLoggedIn }) => {
+const Login = () => {
+    const {setLoggedIn, setToken} = useContext(UserContext)
     const navigate = useNavigate();
     const initalState = {
         email: "",

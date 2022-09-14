@@ -13,19 +13,18 @@ import EditApplication from "./pages/EditApplication";
 import ApplicantDetails from "./pages/ApplicantDetails";
 import ApplicationDetails from "./pages/ApplicationDetails";
 import UniAppsNavbar from "./components/UniAppsNavbar";
-import { getToken } from "./utils/tokenService";
+import Auth from "./utils/auth";
+import AuthenticatedRoute from "./components/AuthenicatedRoute";
+import UserContext from "./utils/UserContext";
 
 function App() {
     const [applicants, setApplicants] = useState([]);
     const [applications, setApplications] = useState([]);
-    const [loggedIn, setLoggedIn] = useState(true);
+    const { loggedIn, setLoggedIn, getToken, setToken, removeToken } = Auth();
+
     console.log("loggedIn" + loggedIn);
 
     useEffect(() => {
-        if (getToken() != null) {
-            setLoggedIn(true);
-        }
-
         fetch("http://localhost:8000/applicants/")
             .then((res) => res.json())
             .then((data) => setApplicants(data))
@@ -35,7 +34,7 @@ function App() {
             .then((res) => res.json())
             .then((data) => setApplications(data))
             .catch((error) => console.log(error));
-    }, [loggedIn]);
+    }, [setLoggedIn, loggedIn]);
 
     const addNewApplicant = (applicant) => {
         setApplicants([...applicants, applicant]);
@@ -57,82 +56,96 @@ function App() {
 
     return (
         <div>
-            <UniAppsNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <UserContext.Provider value={{loggedIn, setLoggedIn, getToken, setToken, removeToken }}>
+            <UniAppsNavbar />
             <Routes>
-                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/" element={loggedIn? <Navigate to={'/dashboard'}/>: <Navigate to="/login" />} />
                 <Route
                     path="/login"
-                    element={<LoginPage setLoggedIn={setLoggedIn} />}
+                    element={loggedIn? <Navigate to={'/dashboard'}/> : <LoginPage/>}
                 />
-                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/register" element={loggedIn? <Navigate to={'/dashboard'}/>:<RegisterPage />} />
                 <Route
                     path="/dashboard"
                     element={
-                        loggedIn ? (
+                        (
+                          <AuthenticatedRoute>
                             <Dashboard
                                 applicants={applicants}
                                 applications={applications}
                                 deleteApplicant={deleteApplicant}
                                 deleteApplication={deleteApplication}
                             />
-                        ) : (
-                            <Navigate replace to={"/login"} />
+                          </AuthenticatedRoute>
                         )
                     }
                 />
                 <Route
                     path="/add-applicant"
                     element={
-                        <AddNewApplicant addNewApplicant={addNewApplicant} />
+                        <AuthenticatedRoute>
+                          <AddNewApplicant addNewApplicant={addNewApplicant} />
+                        </AuthenticatedRoute>  
                     }
                 />
                 <Route
                     path="/add-application"
                     element={
+                      <AuthenticatedRoute>
                         <AddNewApplication
                             addNewApplication={addNewApplication}
                             applicants={applicants}
                         />
+                      </AuthenticatedRoute>
                     }
                 />
                 <Route
                     path="/edit-applicant/:id"
                     element={
+                      <AuthenticatedRoute>
                         <EditApplicant
                             applicants={applicants}
                             setApplicants={setApplicants}
                         />
+                      </AuthenticatedRoute>
                     }
                 />
                 <Route
                     path="/edit-application/:id"
                     element={
+                      <AuthenticatedRoute>
                         <EditApplication
                             applications={applications}
                             setApplications={setApplications}
                         />
+                      </AuthenticatedRoute>
                     }
                 />
                 <Route
                     path="/applicant/:id"
                     element={
+                      <AuthenticatedRoute>
                         <ApplicantDetails
                             applicants={applicants}
                             deleteApplicant={deleteApplicant}
                         />
+                      </AuthenticatedRoute>
                     }
                 />
                 <Route
                     path="/application/:id"
                     element={
+                      <AuthenticatedRoute>
                         <ApplicationDetails
                             applicants={applicants}
                             applications={applications}
                         />
+                      </AuthenticatedRoute>
                     }
                 />
             </Routes>
             <Footer />
+            </UserContext.Provider>
         </div>
     );
 }

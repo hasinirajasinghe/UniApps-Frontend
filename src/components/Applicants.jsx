@@ -12,7 +12,7 @@ const Applicants = ({ applicants, deleteApplicant }) => {
             </div>
             <div className="shadow-lg p-3 mb-5 bg-white app-table">
                 <Table hover>
-                    <thead>
+                    <thead >
                         <tr>
                             <th scope="col">Applicant Name</th>
                             <th scope="col">Major</th>

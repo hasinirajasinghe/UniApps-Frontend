@@ -1,10 +1,11 @@
-import React from "react";
-import { removeToken } from "../utils/tokenService";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import UserContext from "../utils/UserContext";
 
-const UniAppsNavbar = ({ loggedIn, setLoggedIn }) => {
+const UniAppsNavbar = () => {
+    const {loggedIn, setLoggedIn, removeToken} = useContext(UserContext)
     const handleLogout = () => {
         removeToken();
         setLoggedIn(false);
@@ -20,7 +21,7 @@ const UniAppsNavbar = ({ loggedIn, setLoggedIn }) => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="justify-content-end nav-links ">
                             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-                            <Nav.Link href="/" onClick={() => {}}>
+                            <Nav.Link href="/" onClick={handleLogout}>
                                 Logout
                             </Nav.Link>
                         </Nav>

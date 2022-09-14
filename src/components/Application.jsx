@@ -20,7 +20,13 @@ const Application = ({ application, applicant, deleteApplication }) => {
     };
 
     return (
-        <tbody style={{ fontSize: "12px", fontFamily: "sans-serif" }}>
+        <tbody
+            style={{
+                fontSize: "18px",
+                fontFamily:
+                    "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
+            }}
+        >
             <tr>
                 <td>
                     <Link
@@ -38,7 +44,7 @@ const Application = ({ application, applicant, deleteApplication }) => {
                 <td>
                     <Button
                         type="submit"
-                        className="btn-sm edit-button"
+                        className="btn-md edit-button"
                         href={`/edit-application/${application.id}`}
                     >
                         Edit
@@ -48,7 +54,7 @@ const Application = ({ application, applicant, deleteApplication }) => {
                     <Button
                         onClick={onDeleteApplication}
                         type="submit"
-                        className="btn-sm delete-button"
+                        className="btn-md delete-button"
                     >
                         Delete
                     </Button>
