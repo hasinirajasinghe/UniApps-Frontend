@@ -25,12 +25,12 @@ function App() {
     console.log("loggedIn" + loggedIn);
 
     useEffect(() => {
-        fetch("http://localhost:8000/applicants/")
+        fetch("https://uni-apps.herokuapp.com/applicants/")
             .then((res) => res.json())
             .then((data) => setApplicants(data))
             .catch((error) => console.log(error));
 
-        fetch("http://localhost:8000/applications/")
+        fetch("https://uni-apps.herokuapp.com/applications/")
             .then((res) => res.json())
             .then((data) => setApplications(data))
             .catch((error) => console.log(error));
