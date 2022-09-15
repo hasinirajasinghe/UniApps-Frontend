@@ -102,6 +102,53 @@ const Analytics = ({ applicants, applications }) => {
         ],
     };
 
+    // Pie Chart 3
+
+    let application_term_data = {};
+
+    applications.forEach((application) => {
+        if (application.intended_start in application_term_data) {
+          application_term_data[application.intended_start] += 1;
+        } else {
+            // First time seeing a new status we'll create new key in the data array and set it to one to represent that we have one applicant with this status
+            application_term_data[application.intended_start] = 1;
+        }
+    });
+
+    application_term_data = Object.entries(
+      application_term_data
+    );
+
+    let application_term_data_labels =
+    application_term_data.map(([key, value]) => {
+            return key;
+        });
+
+    let application_term_data_values =
+    application_term_data.map(([key, value]) => {
+            return value;
+        });
+
+    const TERM_COLORS = [
+        '#f77f03',
+        '#e31a1d',
+        '#33a02c',
+        '#2778b4',  
+    ];
+
+    application_term_data = {
+        labels: application_term_data_labels,
+        datasets: [
+            {
+                label: "# of applications by status",
+                data: application_term_data_values,
+                backgroundColor: TERM_COLORS,
+                borderColor: TERM_COLORS,
+                borderWidth: 1,
+            },
+        ],
+    };
+
     // Percentage converter for pie charts 
     const option = {
         maintainAspectRatio: true,
@@ -113,7 +160,8 @@ const Analytics = ({ applicants, applications }) => {
         legend: {
           labels: {
             fontSize: 25
-          }
+          },
+          position: 'bottom',
         },
         plugins: {
           datalabels: {
@@ -157,7 +205,7 @@ const Analytics = ({ applicants, applications }) => {
             <div className="analytics-header-container ">
                 <h1 className="analytics-header-container h1">Analytics</h1>
             </div>
-            <div className="shadow-lg p-3 mb-5 bg-white analytics-charts-containerr">
+            <div className="shadow-lg p-3 mb-5 bg-white analytics-charts-container">
                 <div className="analytics-sub-containers">
                     <h3>Enrollment Status</h3>
                     <Pie data={applicant_enrollment_status_data} options={option} />
@@ -165,6 +213,10 @@ const Analytics = ({ applicants, applications }) => {
                 <div className="analytics-sub-containers">
                     <h3>Application Status</h3>
                     <Pie data={application_status_data} options={option}/>
+                </div>
+                <div className="analytics-sub-containers">
+                    <h3>Term Status</h3>
+                    <Pie data={application_term_data} options={option}/>
                 </div>
             </div>
         </div>

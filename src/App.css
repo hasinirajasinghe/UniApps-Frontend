@@ -263,6 +263,12 @@
   border-color: #7eb7d2;
 }
 
+.edit-submit-button:focus {
+  background-color: #7eb7d2;
+  border-color: #7eb7d2;
+  border-style: none;
+}
+
 .edit-form-button-title {
   text-align: center;
 }
@@ -295,10 +301,9 @@
 
 /* Toast */
 .toast_container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 40px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  margin: 0 auto;
   border: 1px solid #329ebc;
 }
 
@@ -308,10 +313,11 @@
   font-size: 28px;
   font-weight: bolder; 
   color: #329ebc;
-  text-align: left;
-  left: 0;
+  height: var(--footer-height);
+  position: sticky;
+  top: calc(100vh - var(--footer-height));
   bottom: 0;
-  width: 100%;
+  text-align: center;
 }
 
 /* Analytics */
@@ -338,10 +344,16 @@
 
 .analytics-charts-container {
   width: 90vw;
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
 }
 
 .analytics-sub-containers {
   width: 300px;
-  display: block;
+  display: inline-block;
+}
+
+.analytics-sub-containers {
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

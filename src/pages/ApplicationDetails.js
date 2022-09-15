@@ -3,23 +3,26 @@ import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
-const ApplicationDetails = ({ applicants, applications, deleteApplication }) => {
-    
-    const navigate = useNavigate()
+const ApplicationDetails = ({
+    applicants,
+    applications,
+    deleteApplication,
+}) => {
+    const navigate = useNavigate();
 
     const onDeleteApplication = () => {
         axios
             .delete(`http://localhost:8000/applications/${application.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
-                    deleteApplication(application.id)
-                    navigate('/dashboard')
+                    deleteApplication(application.id);
+                    navigate("/dashboard");
                 } else {
-                    alert("Failed to delete!")
+                    alert("Failed to delete!");
                 }
             })
             .catch((error) => {
-                alert("Error while deleting!")
+                alert("Error while deleting!");
             });
     };
 

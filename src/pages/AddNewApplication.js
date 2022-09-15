@@ -28,11 +28,11 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        let date = (new Date()).toISOString().split('T')[0];
-        
-        let data = formData
-        data['last_updated'] = date;
+
+        let date = new Date().toISOString().split("T")[0];
+
+        let data = formData;
+        data["last_updated"] = date;
 
         axios
             .post("http://localhost:8000/applications/", data)
@@ -81,142 +81,152 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
     }, []);
 
     return (
-        <div className="shadow-lg p-3 mb-5 bg-white create-main-container">
-            <h2 className="create-main-container h2">Add New Application</h2>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Applicant Name"
-                        className="mb-3"
-                    >
-                        <Form.Select onChange={handleChange} name="applicant">
-                            <option>---</option>
-                            {applicants.map((applicant) => {
-                                return (
-                                    <option key={applicant.id} value={applicant.id}>
-                                        {applicant.name}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Academic year"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="text"
-                            placeholder="Academic year"
-                            name="academic_year"
-                            onChange={handleChange}
-                        />
-                    </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Intended start term"
-                        className="mb-3"
-                    >
-                        <Form.Select
-                            onChange={handleChange}
-                            name="intended_start"
+        <>
+            <div className="shadow-lg p-3 mb-5 bg-white create-main-container">
+                <h2 className="create-main-container h2">Add New Application</h2>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Applicant Name"
+                            className="mb-3"
                         >
-                            <option>---</option>
-                            {Object.entries(terms.current).map(
-                                ([key, value]) => {
+                            <Form.Select onChange={handleChange} name="applicant">
+                                <option>---</option>
+                                {applicants.map((applicant) => {
                                     return (
-                                        <option key={key} value={key}>
-                                            {value}
+                                        <option
+                                            key={applicant.id}
+                                            value={applicant.id}
+                                        >
+                                            {applicant.name}
                                         </option>
                                     );
-                                }
-                            )}
-                        </Form.Select>
-                    </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Intended major"
-                        className="mb-3"
-                    >
-                        <Form.Select
-                            onChange={handleChange}
-                            name="intended_major"
+                                })}
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Academic year"
+                            className="mb-3"
                         >
-                            <option>---</option>
-                            {Object.entries(majors.current).map(
-                                ([key, value]) => {
-                                    return (
-                                        <option key={key} value={key}>
-                                            {value}
-                                        </option>
-                                    );
-                                }
-                            )}
-                        </Form.Select>
-                    </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Enrollment Status"
-                        className="mb-3"
-                    >
-                        <Form.Select onChange={handleChange} name="status">
-                            <option>---</option>
-                            {Object.entries(application_statuses.current).map(
-                                ([key, value]) => {
-                                    return (
-                                        <option key={key} value={key}>
-                                            {value}
-                                        </option>
-                                    );
-                                }
-                            )}
-                        </Form.Select>
-                    </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="School last attended"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="text"
-                            placeholder="School last attended"
-                            name="school_last_attended"
-                            onChange={handleChange}
-                        />
-                    </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="GPA"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="number"
-                            name="gpa"
-                            placeholder="GPA"
-                            min="0.000"
-                            step="0.001"
-                            max="4.000"
-                            onChange={handleChange}
-                        />
-                    </FloatingLabel>
-                </Form.Group>
-                <div className="create-form-button-title">
-                    <Button className="create-submit-button" type="submit">Submit</Button>
-                </div>
-            </Form>
+                            <Form.Control
+                                type="text"
+                                placeholder="Academic year"
+                                name="academic_year"
+                                onChange={handleChange}
+                            />
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Intended start term"
+                            className="mb-3"
+                        >
+                            <Form.Select
+                                onChange={handleChange}
+                                name="intended_start"
+                            >
+                                <option>---</option>
+                                {Object.entries(terms.current).map(
+                                    ([key, value]) => {
+                                        return (
+                                            <option key={key} value={key}>
+                                                {value}
+                                            </option>
+                                        );
+                                    }
+                                )}
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Intended major"
+                            className="mb-3"
+                        >
+                            <Form.Select
+                                onChange={handleChange}
+                                name="intended_major"
+                            >
+                                <option>---</option>
+                                {Object.entries(majors.current).map(
+                                    ([key, value]) => {
+                                        return (
+                                            <option key={key} value={key}>
+                                                {value}
+                                            </option>
+                                        );
+                                    }
+                                )}
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Enrollment Status"
+                            className="mb-3"
+                        >
+                            <Form.Select onChange={handleChange} name="status">
+                                <option>---</option>
+                                {Object.entries(application_statuses.current).map(
+                                    ([key, value]) => {
+                                        return (
+                                            <option key={key} value={key}>
+                                                {value}
+                                            </option>
+                                        );
+                                    }
+                                )}
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="School last attended"
+                            className="mb-3"
+                        >
+                            <Form.Control
+                                type="text"
+                                placeholder="School last attended"
+                                name="school_last_attended"
+                                onChange={handleChange}
+                            />
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="GPA"
+                            className="mb-3"
+                        >
+                            <Form.Control
+                                type="number"
+                                name="gpa"
+                                placeholder="GPA"
+                                min="0.000"
+                                step="0.001"
+                                max="4.000"
+                                onChange={handleChange}
+                            />
+                        </FloatingLabel>
+                    </Form.Group>
+                    <div className="create-form-button-title">
+                        <Button
+                            className="btn-lg create-submit-button"
+                            type="submit"
+                        >
+                            Submit
+                        </Button>
+                    </div>
+                </Form>
+            </div>
             <Toast
                 className="toast toast_container"
                 onClose={() => setShow(false)}
@@ -226,7 +236,7 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
             >
                 <Toast.Body>{toastMessage}</Toast.Body>
             </Toast>
-        </div>
+        </>
     );
 };
 

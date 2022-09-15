@@ -4,24 +4,23 @@ import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ApplicantDetails = ({ applicants, deleteApplicant }) => {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const onDeleteApplicant = () => {
         axios
             .delete(`http://localhost:8000/applicants/${applicant.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
-                    deleteApplicant(applicant.id)
-                    navigate('/dashboard')
+                    deleteApplicant(applicant.id);
+                    navigate("/dashboard");
                 } else {
-                    alert("Failed to delete!")
+                    alert("Failed to delete!");
                 }
             })
             .catch((error) => {
-                alert("Error while deleting!")
-            })
-    }
+                alert("Error while deleting!");
+            });
+    };
 
     const { id } = useParams();
     const applicant = applicants.find((appl) => appl.id === parseInt(id));
@@ -59,7 +58,7 @@ const ApplicantDetails = ({ applicants, deleteApplicant }) => {
                             readOnly
                             plaintext
                             value={applicant?.email}
-                        /> 
+                        />
                     </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
