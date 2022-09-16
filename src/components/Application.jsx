@@ -2,11 +2,12 @@ import React from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import BACKEND_BASE_URL from "../utils/config"
 
 const Application = ({ application, applicant, deleteApplication }) => {
     const onDeleteApplication = () => {
         axios
-            .delete(`https://uni-apps.herokuapp.com/applications/${application.id}/`)
+            .delete(`http://localhost:8000/applications/${application.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     deleteApplication(application.id);

@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
+import BACKEND_BASE_URL from "../utils/config"
 
 const AddNewApplication = ({ applicants, addNewApplication }) => {
     const initialState = {
@@ -35,7 +36,7 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
         data["last_updated"] = date;
 
         axios
-            .post("https://uni-apps.herokuapp.com/applications/", data)
+            .post(`http://localhost:8000/applications/`, data)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     addNewApplication(res.data);
@@ -59,9 +60,9 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
 
     useEffect(() => {
         Promise.all([
-            fetch("https://uni-apps.herokuapp.com/majors/"),
-            fetch("https://uni-apps.herokuapp.com/terms/"),
-            fetch("https://uni-apps.herokuapp.com/application-statuses/"),
+            fetch(`http://localhost:8000/majors/`),
+            fetch(`http://localhost:8000/terms/`),
+            fetch(`http://localhost:8000/application-statuses/`),
         ])
             .then(([majors, terms, application_statuses]) =>
                 Promise.all([

@@ -16,6 +16,7 @@ import UniAppsNavbar from "./components/UniAppsNavbar";
 import Auth from "./utils/auth";
 import AuthenticatedRoute from "./components/AuthenicatedRoute";
 import UserContext from "./utils/UserContext";
+import BACKEND_BASE_URL from "./utils/config"
 
 function App() {
     const [applicants, setApplicants] = useState([]);
@@ -25,12 +26,12 @@ function App() {
     console.log("loggedIn" + loggedIn);
 
     useEffect(() => {
-        fetch("https://uni-apps.herokuapp.com/applicants/")
+        fetch(`http://localhost:8000/applicants/`)
             .then((res) => res.json())
             .then((data) => setApplicants(data))
             .catch((error) => console.log(error));
 
-        fetch("https://uni-apps.herokuapp.com/applications/")
+        fetch(`http://localhost:8000/applications/`)
             .then((res) => res.json())
             .then((data) => setApplications(data))
             .catch((error) => console.log(error));

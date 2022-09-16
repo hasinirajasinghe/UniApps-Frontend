@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useParams } from "react-router-dom";
 import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
+import BACKEND_BASE_URL from "../utils/config"
 
 const EditApplication = () => {
     const initialState = {
@@ -35,7 +36,7 @@ const EditApplication = () => {
         data["last_updated"] = date;
 
         axios
-            .put(`https://uni-apps.herokuapp.com/applications/${id}/`, data)
+            .put(`http://localhost:8000/applications/${id}/`, data)
             .then((res) => {
                 if (res.status === 200) {
                     setToastMessage("Successfully Saved!");
@@ -56,7 +57,7 @@ const EditApplication = () => {
 
     useEffect(() => {
         axios
-            .get(`https://uni-apps.herokuapp.com/applications/${id}/`)
+            .get(`http://localhost:8000/applications/${id}/`)
             .then((res) => {
                 setFormData({
                     applicant: res.data.applicant,
@@ -73,17 +74,17 @@ const EditApplication = () => {
                 console.log(error);
             });
 
-        fetch("https://uni-apps.herokuapp.com/majors/")
+        fetch(`http://localhost:8000/majors/`)
             .then((res) => res.json())
             .then((data) => (majors.current = data))
             .catch((error) => console.log(error));
 
-        fetch("https://uni-apps.herokuapp.com/application-statuses/")
+        fetch(`http://localhost:8000/application-statuses/`)
             .then((res) => res.json())
             .then((data) => (application_statuses.current = data))
             .catch((error) => console.log(error));
 
-        fetch("https://uni-apps.herokuapp.com/terms/")
+        fetch(`http://localhost:8000/terms/`)
             .then((res) => res.json())
             .then((data) => (terms.current = data))
             .catch((error) => console.log(error));

@@ -5,9 +5,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../utils/UserContext";
-import {BACKEND_BASE_URL} from "../utils/config";
+import BACKEND_BASE_URL from "../utils/config";
 
 const Login = () => {
+    console.log(BACKEND_BASE_URL)
     const {setLoggedIn, setToken} = useContext(UserContext)
     const navigate = useNavigate();
     const initalState = {
@@ -28,7 +29,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await axios.post(
-                `https://uni-apps.herokuapp.com/login/`,
+                `http://localhost:8000/login/`,
                 loginCredentials
             );
             if (res.status === 200) {

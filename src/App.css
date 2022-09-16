@@ -312,6 +312,7 @@
   font-family:"Poiret One";
   font-size: 28px;
   font-weight: bolder; 
+  background-color: white;
   color: #329ebc;
   height: var(--footer-height);
   position: sticky;

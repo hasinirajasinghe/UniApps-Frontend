@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
+import BACKEND_BASE_URL from "../utils/config"
 
 const AddNewApplicant = ({ addNewApplicant }) => {
     const initialState = {
@@ -26,7 +27,7 @@ const AddNewApplicant = ({ addNewApplicant }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post("https://uni-apps.herokuapp.com/applicants/", formData)
+            .post(`http://localhost:8000/applicants/`, formData)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     addNewApplicant(res.data);
@@ -47,8 +48,8 @@ const AddNewApplicant = ({ addNewApplicant }) => {
 
     useEffect(() => {
         Promise.all([
-            fetch("https://uni-apps.herokuapp.com/majors/"),
-            fetch("https://uni-apps.herokuapp.com/enrollment-statuses/"),
+            fetch(`http://localhost:8000/majors/`),
+            fetch(`http://localhost:8000/enrollment-statuses/`),
         ])
             .then(([majors, enrollment_statuses]) =>
                 Promise.all([majors.json(), enrollment_statuses.json()])

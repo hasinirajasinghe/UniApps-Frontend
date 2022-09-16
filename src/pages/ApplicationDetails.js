@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import BACKEND_BASE_URL from "../utils/config"
 
 const ApplicationDetails = ({
     applicants,
@@ -12,7 +13,7 @@ const ApplicationDetails = ({
 
     const onDeleteApplication = () => {
         axios
-            .delete(`https://uni-apps.herokuapp.com/applications/${application.id}/`)
+            .delete(`http://localhost:8000/applications/${application.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     deleteApplication(application.id);
