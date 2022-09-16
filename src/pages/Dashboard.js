@@ -15,22 +15,22 @@ const Dashboard = ({
     const application_statuses = useRef([]);
 
     useEffect(() => {
-        fetch("http://localhost:8000/majors/")
+        fetch("http://uni-apps.herokuapp.com/majors/")
             .then((res) => res.json())
             .then((data) => (majors.current = data))
             .catch((error) => console.log(error));
 
-        fetch("http://localhost:8000/application-statuses/")
+        fetch("http://uni-apps.herokuapp.com/application-statuses/")
             .then((res) => res.json())
             .then((data) => (application_statuses.current = data))
             .catch((error) => console.log(error));
 
-        fetch("http://localhost:8000/enrollment-statuses/")
+        fetch("http://uni-apps.herokuapp.com/enrollment-statuses/")
             .then((res) => res.json())
             .then((data) => (enrollment_statuses.current = data))
             .catch((error) => console.log(error));
 
-        fetch("http://localhost:8000/terms/")
+        fetch("http://uni-apps.herokuapp.com/terms/")
             .then((res) => res.json())
             .then((data) => (terms.current = data))
             .catch((error) => console.log(error));

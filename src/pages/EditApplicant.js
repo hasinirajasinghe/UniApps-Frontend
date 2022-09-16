@@ -27,7 +27,7 @@ const EditApplicant = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:8000/applicants/${id}/`, formData)
+            .put(`http://uni-apps.herokuapp.com/applicants/${id}/`, formData)
             .then((res) => {
                 if (res.status === 200) {
                     setToastMessage("Successfully Saved!");
@@ -47,7 +47,7 @@ const EditApplicant = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/applicants/${id}/`)
+            .get(`http://uni-apps.herokuapp.com/applicants/${id}/`)
             .then((res) => {
                 setFormData({
                     name: res.data.name,
@@ -61,12 +61,12 @@ const EditApplicant = () => {
                 console.log(error);
             });
 
-        fetch("http://localhost:8000/majors/")
+        fetch("http://uni-apps.herokuapp.com/majors/")
             .then((res) => res.json())
             .then((data) => (majors.current = data))
             .catch((error) => console.log(error));
 
-        fetch("http://localhost:8000/enrollment-statuses/")
+        fetch("http://uni-apps.herokuapp.com/enrollment-statuses/")
             .then((res) => res.json())
             .then((data) => (enrollment_statuses.current = data))
             .catch((error) => console.log(error));

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Application = ({ application, applicant, deleteApplication }) => {
     const onDeleteApplication = () => {
         axios
-            .delete(`http://localhost:8000/applications/${application.id}/`)
+            .delete(`https://uni-apps.herokuapp.com/applications/${application.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     deleteApplication(application.id);

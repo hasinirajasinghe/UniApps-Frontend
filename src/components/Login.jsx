@@ -5,6 +5,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../utils/UserContext";
+import {BACKEND_BASE_URL} from "../utils/config";
 
 const Login = () => {
     const {setLoggedIn, setToken} = useContext(UserContext)
@@ -27,7 +28,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await axios.post(
-                `http://localhost:8000/login/`,
+                `https://uni-apps.herokuapp.com/login/`,
                 loginCredentials
             );
             if (res.status === 200) {

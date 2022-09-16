@@ -35,7 +35,7 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
         data["last_updated"] = date;
 
         axios
-            .post("http://localhost:8000/applications/", data)
+            .post("http://uni-apps.herokuapp.com/applications/", data)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     addNewApplication(res.data);
@@ -59,9 +59,9 @@ const AddNewApplication = ({ applicants, addNewApplication }) => {
 
     useEffect(() => {
         Promise.all([
-            fetch("http://localhost:8000/majors/"),
-            fetch("http://localhost:8000/terms/"),
-            fetch("http://localhost:8000/application-statuses/"),
+            fetch("http://uni-apps.herokuapp.com/majors/"),
+            fetch("http://uni-apps.herokuapp.com/terms/"),
+            fetch("http://uni-apps.herokuapp.com/application-statuses/"),
         ])
             .then(([majors, terms, application_statuses]) =>
                 Promise.all([
