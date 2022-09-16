@@ -12,7 +12,7 @@ const ApplicationDetails = ({
 
     const onDeleteApplication = () => {
         axios
-            .delete(`http://uni-apps.herokuapp.com/applications/${application.id}/`)
+            .delete(`https://uni-apps.herokuapp.com/applications/${application.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     deleteApplication(application.id);

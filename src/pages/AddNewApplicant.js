@@ -26,7 +26,7 @@ const AddNewApplicant = ({ addNewApplicant }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post("http://uni-apps.herokuapp.com/applicants/", formData)
+            .post("https://uni-apps.herokuapp.com/applicants/", formData)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     addNewApplicant(res.data);
@@ -47,8 +47,8 @@ const AddNewApplicant = ({ addNewApplicant }) => {
 
     useEffect(() => {
         Promise.all([
-            fetch("http://uni-apps.herokuapp.com/majors/"),
-            fetch("http://uni-apps.herokuapp.com/enrollment-statuses/"),
+            fetch("https://uni-apps.herokuapp.com/majors/"),
+            fetch("https://uni-apps.herokuapp.com/enrollment-statuses/"),
         ])
             .then(([majors, enrollment_statuses]) =>
                 Promise.all([majors.json(), enrollment_statuses.json()])

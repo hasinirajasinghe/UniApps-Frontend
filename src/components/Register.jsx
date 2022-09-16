@@ -24,7 +24,7 @@ const Register = () => {
         e.preventDefault();
         try {
             const res = await axios.post(
-                `http://uni-apps.herokuapp.com/register/`,
+                `https://uni-apps.herokuapp.com/register/`,
                 registration
             );
             if (res.status === 200) {

@@ -8,7 +8,7 @@ const ApplicantDetails = ({ applicants, deleteApplicant }) => {
 
     const onDeleteApplicant = () => {
         axios
-            .delete(`http://uni-apps.herokuapp.com/applicants/${applicant.id}/`)
+            .delete(`https://uni-apps.herokuapp.com/applicants/${applicant.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     deleteApplicant(applicant.id);

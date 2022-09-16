@@ -35,7 +35,7 @@ const EditApplication = () => {
         data["last_updated"] = date;
 
         axios
-            .put(`http://uni-apps.herokuapp.com/applications/${id}/`, data)
+            .put(`https://uni-apps.herokuapp.com/applications/${id}/`, data)
             .then((res) => {
                 if (res.status === 200) {
                     setToastMessage("Successfully Saved!");
@@ -56,7 +56,7 @@ const EditApplication = () => {
 
     useEffect(() => {
         axios
-            .get(`http://uni-apps.herokuapp.com/applications/${id}/`)
+            .get(`https://uni-apps.herokuapp.com/applications/${id}/`)
             .then((res) => {
                 setFormData({
                     applicant: res.data.applicant,
@@ -73,17 +73,17 @@ const EditApplication = () => {
                 console.log(error);
             });
 
-        fetch("http://uni-apps.herokuapp.com/majors/")
+        fetch("https://uni-apps.herokuapp.com/majors/")
             .then((res) => res.json())
             .then((data) => (majors.current = data))
             .catch((error) => console.log(error));
 
-        fetch("http://uni-apps.herokuapp.com/application-statuses/")
+        fetch("https://uni-apps.herokuapp.com/application-statuses/")
             .then((res) => res.json())
             .then((data) => (application_statuses.current = data))
             .catch((error) => console.log(error));
 
-        fetch("http://uni-apps.herokuapp.com/terms/")
+        fetch("https://uni-apps.herokuapp.com/terms/")
             .then((res) => res.json())
             .then((data) => (terms.current = data))
             .catch((error) => console.log(error));
