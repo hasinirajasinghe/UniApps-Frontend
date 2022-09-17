@@ -74,3 +74,4 @@ https://react-chartjs-2.js.org/
 
 ### Known Issues
 - One of the MVPs was to add an option on the applicant detail page to send emails to applicants. However with using boostrap forms, came across an issue where the functionality could not be added on time. 
+- Analytical graphs needs to be responsive. 
