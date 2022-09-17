@@ -2,7 +2,7 @@
 ### Project idea 
 >Web application tool for Higher Education admissions staff. This interactive application will allow counselors, (typically the first point of contact for prospective applicants) to keep track of applicant status as well as the application status throughout the enrollments process. With the option to sign up/log in, counselors will have full access to maintain and manage applicant records. Additionally, counselors will have a graphical overview of applicant and application data to maximize efficiency in analysis. 
 
-Website link: http://uniapps-ed.herokuapp.com/login
+Website link: http://uniapps-ed.herokuapp.com
 
 ### Project Images 
 Login Page
