@@ -16,7 +16,7 @@ import UniAppsNavbar from "./components/UniAppsNavbar";
 import Auth from "./utils/auth";
 import AuthenticatedRoute from "./components/AuthenicatedRoute";
 import UserContext from "./utils/UserContext";
-import BACKEND_BASE_URL from "./utils/config"
+import config from "./utils/config"
 
 function App() {
     const [applicants, setApplicants] = useState([]);
@@ -26,12 +26,12 @@ function App() {
     console.log("loggedIn" + loggedIn);
 
     useEffect(() => {
-        fetch(`http://localhost:8000/applicants/`)
+        fetch(`${config.BACKEND_BASE_URL}/applicants/`)
             .then((res) => res.json())
             .then((data) => setApplicants(data))
             .catch((error) => console.log(error));
 
-        fetch(`http://localhost:8000/applications/`)
+        fetch(`${config.BACKEND_BASE_URL}/applications/`)
             .then((res) => res.json())
             .then((data) => setApplications(data))
             .catch((error) => console.log(error));

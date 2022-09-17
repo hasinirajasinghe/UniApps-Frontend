@@ -1,15 +1,15 @@
 import axios from "axios";
 import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import BACKEND_BASE_URL from "../utils/config"
+import { useNavigate, useParams } from "react-router-dom";
+import config from "../utils/config"
 
 const ApplicantDetails = ({ applicants, deleteApplicant }) => {
     const navigate = useNavigate();
 
     const onDeleteApplicant = () => {
         axios
-            .delete(`http://localhost:8000/applicants/${applicant.id}/`)
+            .delete(`${config.BACKEND_BASE_URL}/applicants/${applicant.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     deleteApplicant(applicant.id);

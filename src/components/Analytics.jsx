@@ -5,7 +5,8 @@ import { Pie } from "react-chartjs-2";
 const Analytics = ({ applicants, applications }) => {
     ChartJS.register(ArcElement, Tooltip, Legend);
 
-    //  PIE CHART 1 
+    //  PIE CHART 1 for enrollment status 
+
     // Create object to hold data for how many applicants there are for a given status
     let applicant_enrollment_status_data = {};
 
@@ -51,7 +52,7 @@ const Analytics = ({ applicants, applications }) => {
         ],
     };
 
-    // PIE CHART 2
+    // PIE CHART 2  for application status 
 
     let application_status_data = {};
 
@@ -102,7 +103,7 @@ const Analytics = ({ applicants, applications }) => {
         ],
     };
 
-    // Pie Chart 3
+    // Pie Chart 3 for application terms 
 
     let application_term_data = {};
 

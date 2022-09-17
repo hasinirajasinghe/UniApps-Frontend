@@ -8,6 +8,7 @@ const Applications = ({ applicants, applications, deleteApplication }) => {
     
     const applicantIdToNameValues = {}
 
+    // 
     applicants.forEach(applicant => {
         applicantIdToNameValues[applicant.id] = applicant;
     });

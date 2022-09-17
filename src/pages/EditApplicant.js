@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useParams } from "react-router-dom";
 import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
-import BACKEND_BASE_URL from "../utils/config"
+import config from "../utils/config"
 
 const EditApplicant = () => {
     const initialState = {
@@ -28,7 +28,7 @@ const EditApplicant = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:8000/applicants/${id}/`, formData)
+            .put(`${config.BACKEND_BASE_URL}/applicants/${id}/`, formData)
             .then((res) => {
                 if (res.status === 200) {
                     setToastMessage("Successfully Saved!");
@@ -48,7 +48,7 @@ const EditApplicant = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/applicants/${id}/`)
+            .get(`${config.BACKEND_BASE_URL}/applicants/${id}/`)
             .then((res) => {
                 setFormData({
                     name: res.data.name,
@@ -62,12 +62,12 @@ const EditApplicant = () => {
                 console.log(error);
             });
 
-        fetch(`http://localhost:8000/majors/`)
+        fetch(`${config.BACKEND_BASE_URL}/majors/`)
             .then((res) => res.json())
             .then((data) => (majors.current = data))
             .catch((error) => console.log(error));
 
-        fetch(`http://localhost:8000/enrollment-statuses/`)
+        fetch(`${config.BACKEND_BASE_URL}/enrollment-statuses/`)
             .then((res) => res.json())
             .then((data) => (enrollment_statuses.current = data))
             .catch((error) => console.log(error));

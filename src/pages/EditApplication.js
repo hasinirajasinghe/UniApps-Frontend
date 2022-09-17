@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useParams } from "react-router-dom";
 import { Button, Toast } from "react-bootstrap";
 import axios from "axios";
-import BACKEND_BASE_URL from "../utils/config"
+import config from "../utils/config"
 
 const EditApplication = () => {
     const initialState = {
@@ -36,7 +36,7 @@ const EditApplication = () => {
         data["last_updated"] = date;
 
         axios
-            .put(`http://localhost:8000/applications/${id}/`, data)
+            .put(`${config.BACKEND_BASE_URL}/applications/${id}/`, data)
             .then((res) => {
                 if (res.status === 200) {
                     setToastMessage("Successfully Saved!");
@@ -57,7 +57,7 @@ const EditApplication = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/applications/${id}/`)
+            .get(`${config.BACKEND_BASE_URL}/applications/${id}/`)
             .then((res) => {
                 setFormData({
                     applicant: res.data.applicant,
@@ -74,17 +74,17 @@ const EditApplication = () => {
                 console.log(error);
             });
 
-        fetch(`http://localhost:8000/majors/`)
+        fetch(`${config.BACKEND_BASE_URL}/majors/`)
             .then((res) => res.json())
             .then((data) => (majors.current = data))
             .catch((error) => console.log(error));
 
-        fetch(`http://localhost:8000/application-statuses/`)
+        fetch(`${config.BACKEND_BASE_URL}/application-statuses/`)
             .then((res) => res.json())
             .then((data) => (application_statuses.current = data))
             .catch((error) => console.log(error));
 
-        fetch(`http://localhost:8000/terms/`)
+        fetch(`${config.BACKEND_BASE_URL}/terms/`)
             .then((res) => res.json())
             .then((data) => (terms.current = data))
             .catch((error) => console.log(error));

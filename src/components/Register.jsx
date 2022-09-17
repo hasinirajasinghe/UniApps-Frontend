@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import BACKEND_BASE_URL from "../utils/config"
+import config from "../utils/config"
 
 const Register = () => {
     const initalState = {
@@ -25,7 +25,7 @@ const Register = () => {
         e.preventDefault();
         try {
             const res = await axios.post(
-                `http://localhost:8000/register/`,
+                `${config.BACKEND_BASE_URL}/register/`,
                 registration
             );
             if (res.status === 200) {

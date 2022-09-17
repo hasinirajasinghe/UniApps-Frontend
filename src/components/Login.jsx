@@ -5,10 +5,9 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../utils/UserContext";
-import BACKEND_BASE_URL from "../utils/config";
+import config from "../utils/config";
 
 const Login = () => {
-    console.log(BACKEND_BASE_URL)
     const {setLoggedIn, setToken} = useContext(UserContext)
     const navigate = useNavigate();
     const initalState = {
@@ -29,7 +28,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await axios.post(
-                `http://localhost:8000/login/`,
+                `${config.BACKEND_BASE_URL}/login/`,
                 loginCredentials
             );
             if (res.status === 200) {

@@ -2,12 +2,12 @@ import React from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import BACKEND_BASE_URL from "../utils/config"
+import config from "../utils/config"
 
 const Applicant = ({ applicant, deleteApplicant }) => {
     const onDeleteApplicant = () => {
         axios
-            .delete(`http://localhost:8000/applicants/${applicant.id}/`)
+            .delete(`${config.BACKEND_BASE_URL}/applicants/${applicant.id}/`)
             .then((res) => {
                 if (res.status >= 200 && res.status < 300) {
                     deleteApplicant(applicant.id);
