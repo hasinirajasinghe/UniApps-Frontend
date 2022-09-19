@@ -75,3 +75,4 @@ https://react-chartjs-2.js.org/
 ### Known Issues
 - One of the MVPs was to add an option on the applicant detail page to send emails to applicants. However with using boostrap forms, came across an issue where the functionality could not be added on time. 
 - Analytical graphs needs to be responsive. 
+- For optimum functionality, in the future hope to update this application to have the functionality to be connected to a CRM (customer relationship management) system that holds applicant and application data. In a sense where data would be updated in parallel with the CRM.
